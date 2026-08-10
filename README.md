@@ -1,6 +1,6 @@
 # xpolicylab.github.io
 
-Official website for **XPolicyLab** — a unified standard for robot policy development and evaluation.
+Project website for **XPolicyLab** — a unified standard and open ecosystem for robot policy evaluation and deployment.
 
 ## Local preview
 
@@ -13,17 +13,22 @@ Open [http://localhost:8080](http://localhost:8080).
 ## Structure
 
 ```
-├── index.html          # Main landing page
-├── css/styles.css      # Styles
-├── js/main.js          # Copy citation, etc.
+├── index.html
+├── contributors.html          # redirects to index
+├── css/styles.css
+├── js/main.js
 └── assets/
     ├── logo.png
-    └── partners/       # Partner logos (replace placeholders)
+    ├── booth_transparent.png  # real-eval cell
+    ├── partners/              # optional partner marks
+    └── paper/
+        ├── XPolicyLab.pdf
+        ├── fig1.png           # policy zoo overview
+        ├── fig2.png           # infrastructure
+        └── fig3.png           # cross-platform eval
 ```
 
-## Customize
+## Links
 
-- **Authors** — edit the author cards in `index.html`
-- **Policies** — update the policy grid with your supported policy families
-- **Partners** — drop official logos into `assets/partners/` and update links
-- **Citation** — update the BibTeX block in `index.html`
+- Code: [XPolicyLab/XPolicyLab](https://github.com/XPolicyLab/XPolicyLab)
+- Contribute: [CONTRIBUTING.md](https://github.com/XPolicyLab/XPolicyLab/blob/main/CONTRIBUTING.md)

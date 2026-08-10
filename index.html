@@ -3,38 +3,213 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>XPolicyLab</title>
-  <meta name="description" content="XPolicyLab is an open-source project for robot policy development and evaluation.">
+  <title>XPolicyLab: A Unified Standard and Open Ecosystem for Robot Policy Evaluation and Deployment</title>
+  <meta name="description" content="XPolicyLab is a unified standard and open ecosystem for robot policy evaluation and deployment, connecting policies to RoboTwin and RoboDojo through one adapter interface.">
   <meta name="robots" content="index, follow">
   <link rel="canonical" href="https://xpolicylab.github.io/">
   <meta property="og:title" content="XPolicyLab">
-  <meta property="og:description" content="An open-source project for robot policy development and evaluation.">
+  <meta property="og:description" content="A unified standard and open ecosystem for robot policy evaluation and deployment.">
   <meta property="og:type" content="website">
   <meta property="og:url" content="https://xpolicylab.github.io/">
-  <meta property="og:image" content="assets/logo.png">
+  <meta property="og:image" content="assets/teaser.png">
   <meta name="twitter:card" content="summary_large_image">
-  <link rel="icon" href="assets/logo.png" type="image/png">
+  <link rel="icon" href="assets/teaser.png" type="image/png">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=EB+Garamond:wght@500;600;700&family=Geist:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=EB+Garamond:wght@400;500;600;700&family=Inter:wght@400;600;700&family=JetBrains+Mono:wght@400;600;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="css/styles.css">
 </head>
-<body class="coming-soon-body">
-  <main class="coming-soon" id="top">
-    <div class="coming-soon-inner">
-      <img src="assets/logo.png" alt="XPolicyLab" class="coming-soon-logo">
-      <p class="coming-soon-label">Open Source Robot Policy Lab</p>
-      <h1 class="hero-title">XPolicyLab</h1>
-      <p class="coming-soon-text">
-        XPolicyLab is an open-source project for robot policy development and evaluation.
-      </p>
-      <a href="https://github.com/XPolicyLab/XPolicyLab" class="btn btn-primary" target="_blank" rel="noopener noreferrer">GitHub Repository</a>
-    </div>
+<body>
+  <div class="page">
+    <div class="layout" id="top">
+      <article>
+        <h1 class="article-title"><span class="t-blue">X</span><span class="t-black">Policy</span><span class="t-blue">Lab</span></h1>
+        <p class="article-subtitle">
+          A Unified Standard and Open Ecosystem for Robot Policy Evaluation and Deployment
+        </p>
 
-    <footer class="coming-soon-footer">
-      <p>&copy; 2026 XPolicyLab</p>
-    </footer>
-  </main>
+        <div class="meta-bar">
+          <div class="meta-row">
+            <span class="meta-label">Institutions</span>
+            <span class="meta-value">MMLab@HKU &amp; THU</span>
+          </div>
+          <div class="meta-row">
+            <span class="meta-label">Paper</span>
+            <span class="meta-value">
+              <a class="paper-link" href="assets/paper/XPolicyLab.pdf" target="_blank" rel="noopener noreferrer"><img class="meta-icon" src="assets/arxiv.svg" alt="arXiv">PDF</a>
+            </span>
+          </div>
+          <div class="meta-row">
+            <span class="meta-label">Code</span>
+            <span class="meta-value">
+              <a href="https://github.com/XPolicyLab/XPolicyLab" target="_blank" rel="noopener noreferrer"><img class="meta-icon" src="assets/github.svg" alt="GitHub">github.com/XPolicyLab/XPolicyLab</a>
+            </span>
+          </div>
+          <div class="meta-row">
+            <span class="meta-label">Contact</span>
+            <span class="meta-value">
+              Tianxing Chen (project lead),
+              <a href="mailto:chentianxing2002@gmail.com">chentianxing2002@gmail.com</a>
+            </span>
+          </div>
+        </div>
+
+        <p class="lead">
+          Connecting N policies to M evaluation environments — from O(NM) down to O(N+M).
+        </p>
+
+        <figure class="figure">
+          <img src="assets/teaser.png" alt="XPolicyLab overview" width="1600" height="670" loading="eager">
+        </figure>
+
+        <div class="prose">
+          <h2 id="overview">What is this project</h2>
+          <p>
+            Robot policy evaluation and deployment remain fragmented by model-specific software
+            dependencies, data representations, and runtime interfaces, so connecting N policies to
+            M environments costs O(NM) separate integrations.
+            <strong>XPolicyLab</strong> is a unified standard and open ecosystem that reduces this to O(N+M).
+          </p>
+          <p>
+            It specifies common observation, action, and trajectory schemas together with a minimal
+            adapter interface for observation updates, action prediction, batched execution, and episode reset.
+            A dependency-isolated client/server architecture separates policy inference from environment
+            execution, so each side retains its native stack and may run locally or remotely.
+          </p>
+          <p>
+            As of August 2026, the ecosystem integrates <strong>42</strong> robot policies and standardizes
+            installation, debugging, serving, and evaluation. The same adapters serve RoboTwin,
+            RoboDojo simulation, and standardized real-robot evaluation.
+          </p>
+
+          <figure class="figure">
+            <img src="assets/method.png" alt="XPolicyLab infrastructure" width="1600" height="871" loading="lazy">
+            <figcaption>Fig. 1 — Infrastructure of XPolicyLab. One adapter serves benchmarks, simulators, and physical robots.</figcaption>
+          </figure>
+
+          <h2 id="policies">Supported Policies</h2>
+          <p>
+            42 policies are currently integrated, spanning VLA, world-action, imitation-learning,
+            and memory-augmented families. Click any model to view its adapter.
+          </p>
+        </div>
+
+        <div class="policy-marquee" aria-label="Supported policies">
+          <div class="marquee-fade marquee-fade-left"></div>
+          <div class="marquee-fade marquee-fade-right"></div>
+          <div class="marquee-stage" id="marquee-stage"></div>
+        </div>
+
+        <div class="prose">
+          <h2 id="benchmarks">Supported Benchmarks</h2>
+          <p>
+            XPolicyLab is benchmark-agnostic: any benchmark, simulator, or real-robot setup can plug in
+            as an environment client against the same policy-side interface — one adapter per policy,
+            one client per environment. Two public benchmarks are already integrated, and their official
+            leaderboards are powered by XPolicyLab submissions.
+          </p>
+          <div class="bench-logos">
+            <a href="https://robotwin-platform.github.io/leaderboard" target="_blank" rel="noopener noreferrer">
+              <img src="assets/robotwin.png" alt="RoboTwin 2.0">
+            </a>
+            <a href="https://robodojo-benchmark.com/LeaderBoard" target="_blank" rel="noopener noreferrer">
+              <img src="assets/robodojo.png" alt="RoboDojo">
+            </a>
+          </div>
+          <ul>
+            <li>
+              <a href="https://robotwin-platform.github.io/leaderboard" target="_blank" rel="noopener noreferrer">RoboTwin 2.0 Leaderboard</a>
+              — bimanual manipulation across 50 tasks under clean and randomized settings; results reproduced via the XPolicyLab standard interface.
+            </li>
+            <li>
+              <a href="https://robodojo-benchmark.com/LeaderBoard" target="_blank" rel="noopener noreferrer">RoboDojo-sim Leaderboard</a>
+              — 42 simulation tasks across five capability dimensions: Generalization, Precision, Long-Horizon, Memory, and Open.
+            </li>
+            <li>
+              <a href="https://robodojo-benchmark.com/LeaderBoard" target="_blank" rel="noopener noreferrer">RoboDojo-real Leaderboard</a>
+              — 18 physical tasks across three bimanual embodiments: ARX X5, Piper, and Piper X.
+            </li>
+          </ul>
+
+          <figure class="figure">
+            <img src="assets/case.png" alt="Cross-platform evaluation" width="1600" height="527" loading="lazy">
+            <figcaption>Fig. 2 — Cross-platform evaluation through a shared codebase and standardized serving interface.</figcaption>
+          </figure>
+
+          <h2 id="submit">How to contribute a policy</h2>
+          <p>
+            Community policies are welcome — open a PR that adds <code>policy/&lt;POLICY&gt;/</code>.
+            A PR is also required for the official RoboDojo and RoboTwin leaderboards, with a checkpoint
+            that reproduces your results. See
+            <a href="https://github.com/XPolicyLab/XPolicyLab#-submit-your-policy" target="_blank" rel="noopener noreferrer">Submit Your Policy</a>
+            and
+            <a href="https://github.com/XPolicyLab/XPolicyLab/blob/main/CONTRIBUTING.md" target="_blank" rel="noopener noreferrer">CONTRIBUTING.md</a>.
+          </p>
+          <ol>
+            <li><strong>Follow the standard adapter layout</strong> for install / data / train / eval; eval-only is allowed with a training-release timeline.</li>
+            <li><strong>Write the policy README</strong> so the shared script conventions work; use <code>policy/demo_policy</code>.</li>
+            <li><strong>Run the closed loop locally</strong> — at least <code>EVAL_ENV_TYPE=debug</code>; ideally also simulator-backed eval.</li>
+            <li><strong>Attach a checkpoint download script</strong> for leaderboard evaluation (Hugging Face or ModelScope preferred).</li>
+          </ol>
+<pre><code>git clone https://github.com/XPolicyLab/XPolicyLab.git
+cd XPolicyLab && pip install -e .
+bash scripts/create_policy.sh &lt;POLICY_NAME&gt;
+
+cd policy/&lt;POLICY_NAME&gt;
+export EVAL_ENV_TYPE=debug
+bash eval.sh RoboDojo stack_bowls &lt;ckpt_name&gt; arx_x5 joint 0 0 0 \
+  &lt;policy_env&gt; base</code></pre>
+
+          <h3>What skills are needed</h3>
+          <ul>
+            <li><strong>Python &amp; deep learning</strong>: read the upstream model’s inference API and load checkpoints.</li>
+            <li><strong>Linux / shell</strong>: set up conda/uv environments and run install.sh / eval.sh.</li>
+            <li><strong>Robotics basics</strong>: understand observation / action spaces (joint / ee), cameras, and frames.</li>
+            <li><strong>Agent (optional)</strong>: the repo ships Cursor Agent Skills that scaffold, implement, and audit adapters.</li>
+          </ul>
+          <p>
+            In a controlled study, following the standard reduces π0.5 → RoboDojo integration from
+            <strong>over five hours</strong> to about <strong>two hours</strong>, and packaged agent skills
+            reduce it further to about <strong>thirty minutes</strong>.
+          </p>
+
+          <h2 id="citation">Citation</h2>
+<pre id="citation-bibtex"><code>@article{xpolicylab2026,
+  title={XPolicyLab: A Unified Standard and Open Ecosystem
+         for Robot Policy Evaluation and Deployment},
+  author={XPolicyLab Contributors},
+  year={2026},
+  note={Project website: https://xpolicylab.github.io/}
+}</code></pre>
+          <p>
+            <button type="button" class="text-btn" id="copy-citation">Copy BibTeX</button>
+          </p>
+        </div>
+      </article>
+
+      <aside class="toc" aria-label="Contents">
+        <p class="toc-label">Contents</p>
+        <ul class="toc-list">
+          <li><a href="#overview">Overview</a></li>
+          <li><a href="#policies">Supported Policies</a></li>
+          <li><a href="#benchmarks">Supported Benchmarks</a></li>
+          <li><a href="#submit">Contribute</a></li>
+          <li><a href="#citation">Citation</a></li>
+        </ul>
+      </aside>
+
+      <footer class="site-footer">
+        <div class="footer-logos">
+          <span class="footer-logos-label">Leading Institutions</span>
+          <div class="footer-logos-row">
+            <img src="assets/mmlab-hku.png" alt="MMLab@HKU" class="footer-logo-img">
+            <img src="assets/tsinghua.png" alt="Tsinghua University" class="footer-logo-img">
+          </div>
+        </div>
+        <p>&copy; 2026 XPolicyLab · MMLab@HKU &amp; THU</p>
+      </footer>
+    </div>
+  </div>
 
   <script src="js/main.js"></script>
 </body>

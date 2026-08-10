@@ -1,273 +1,161 @@
 (function () {
-  /* Copy BibTeX citation to clipboard */
-  var copyBtn = document.getElementById("copy-citation");
-  var citationEl = document.getElementById("citation-bibtex");
-
-  if (copyBtn && citationEl) {
-    copyBtn.addEventListener("click", function () {
-      var text = citationEl.textContent.trim();
-
-      navigator.clipboard.writeText(text).then(function () {
-        copyBtn.textContent = "Copied!";
-        copyBtn.classList.add("copied");
-
-        setTimeout(function () {
-          copyBtn.textContent = "Copy BibTeX";
-          copyBtn.classList.remove("copied");
-        }, 2000);
-      });
-    });
-  }
-
-  /* Add a subtle border/background to the nav once the page scrolls */
-  var nav = document.getElementById("nav");
-
-  if (nav) {
-    var onScroll = function () {
-      if (window.scrollY > 8) {
-        nav.classList.add("scrolled");
-      } else {
-        nav.classList.remove("scrolled");
-      }
+  /* TOC scroll-spy */
+  var tocLinks = document.querySelectorAll(".toc-list a");
+  if (tocLinks.length && "IntersectionObserver" in window) {
+    var linkFor = {};
+    var activate = function (a) {
+      tocLinks.forEach(function (l) { l.classList.remove("is-active"); });
+      if (a) a.classList.add("is-active");
     };
-
-    onScroll();
-    window.addEventListener("scroll", onScroll, { passive: true });
-  }
-
-  /* Page language toggle */
-  var langBtns = document.querySelectorAll(".lang-btn");
-  var langBlocks = document.querySelectorAll(".lang-content[data-lang]");
-
-  if (langBtns.length && langBlocks.length) {
-    langBtns.forEach(function (btn) {
-      btn.addEventListener("click", function () {
-        var lang = btn.getAttribute("data-lang");
-
-        langBtns.forEach(function (b) {
-          var isActive = b === btn;
-          b.classList.toggle("is-active", isActive);
-          b.setAttribute("aria-pressed", isActive ? "true" : "false");
-        });
-
-        langBlocks.forEach(function (block) {
-          block.classList.toggle("is-hidden", block.getAttribute("data-lang") !== lang);
-        });
-
-        document.documentElement.lang = lang === "zh" ? "zh-CN" : "en";
-      });
+    tocLinks.forEach(function (a) {
+      linkFor[a.getAttribute("href").slice(1)] = a;
+      a.addEventListener("click", function () { activate(a); });
     });
-  }
-})();
-
-/* ── Benchmark landing: task grids, leaderboard, tabs, counters ── */
-(function () {
-  var GRADIENTS = [
-    "linear-gradient(135deg, #eef2ff 0%, #e0e7ff 100%)",
-    "linear-gradient(135deg, #ecfdf5 0%, #d1fae5 100%)",
-    "linear-gradient(135deg, #fef3c7 0%, #fde68a 100%)",
-    "linear-gradient(135deg, #ede9fe 0%, #ddd6fe 100%)",
-    "linear-gradient(135deg, #f1f5f9 0%, #e2e8f0 100%)",
-    "linear-gradient(135deg, #fce7f3 0%, #fbcfe8 100%)",
-    "linear-gradient(135deg, #cffafe 0%, #a5f3fc 100%)",
-    "linear-gradient(135deg, #ffedd5 0%, #fed7aa 100%)"
-  ];
-
-  /* Pool of representative manipulation tasks (name + glyph). */
-  var TASK_POOL = [
-    ["Block Handover", "\uD83E\uDDE9"], ["Stack Blocks", "\uD83C\uDFD7\uFE0F"], ["Pick Apple", "\uD83C\uDF4E"],
-    ["Place Shoe", "\uD83D\uDC5F"], ["Pour Water", "\uD83E\uDD5B"], ["Open Drawer", "\uD83D\uDDC4\uFE0F"],
-    ["Close Laptop", "\uD83D\uDCBB"], ["Hang Mug", "\u2615"], ["Insert Peg", "\uD83D\uDD29"],
-    ["Fold Cloth", "\uD83E\uDDFA"], ["Wipe Table", "\uD83E\uDDFD"], ["Sort Cubes", "\uD83C\uDFB2"],
-    ["Press Button", "\uD83D\uDD18"], ["Turn Knob", "\uD83C\uDF9B\uFE0F"], ["Plug Charger", "\uD83D\uDD0C"],
-    ["Sweep Debris", "\uD83E\uDDF9"], ["Screw Bottle Cap", "\uD83E\uDDF4"], ["Flip Switch", "\uD83D\uDCA1"],
-    ["Hammer Nail", "\uD83D\uDD28"], ["Scan Item", "\uD83D\uDCE6"], ["Water Plant", "\uD83E\uDEB4"],
-    ["Slice Bread", "\uD83E\uDD56"], ["Load Dish", "\uD83C\uDF7D\uFE0F"], ["Stack Bowls", "\uD83E\uDD63"],
-    ["Grasp Bottle", "\uD83C\uDF7C"], ["Rotate Cube", "\uD83E\uDDCA"], ["Toggle Lamp", "\uD83D\uDD26"],
-    ["Assemble Gear", "\u2699\uFE0F"], ["Pack Box", "\uD83D\uDCE6"], ["Unstack Cups", "\uD83E\uDD64"],
-    ["Push Chair", "\uD83E\uDE91"], ["Pull Handle", "\uD83D\uDEAA"], ["Zip Bag", "\uD83D\uDC5C"],
-    ["Sort Fruit", "\uD83C\uDF47"], ["Balance Rod", "\uD83E\uDD62"], ["Thread Ring", "\uD83D\uDC8D"],
-    ["Coil Cable", "\uD83D\uDD0C"], ["Stamp Paper", "\uD83D\uDCC4"], ["Peel Sticker", "\uD83C\uDFF7\uFE0F"],
-    ["Snap Lego", "\uD83E\uDDE9"], ["Wind Toy", "\uD83E\uDDF8"], ["Dial Phone", "\u260E\uFE0F"],
-    ["Clip Pen", "\uD83D\uDD8A\uFE0F"], ["Tie Knot", "\uD83E\uDEA2"], ["Stir Pot", "\uD83C\uDF72"],
-    ["Crack Egg", "\uD83E\uDD5A"], ["Peel Banana", "\uD83C\uDF4C"], ["Sort Screws", "\uD83D\uDD29"],
-    ["Roll Dice", "\uD83C\uDFB2"], ["Fold Paper", "\uD83D\uDCC3"]
-  ];
-
-  function buildTasks(count, prefix) {
-    var out = [];
-    for (var i = 0; i < count; i++) {
-      var t = TASK_POOL[i % TASK_POOL.length];
-      out.push({
-        id: prefix + "-" + String(i + 1).padStart(2, "0"),
-        name: t[0],
-        glyph: t[1],
-        grad: GRADIENTS[i % GRADIENTS.length]
-      });
-    }
-    return out;
-  }
-
-  var TASKS = {
-    "rt3-sim": buildTasks(42, "S3"),
-    "rt3-real": buildTasks(18, "R3"),
-    "rt2-sim": buildTasks(50, "S2")
-  };
-
-  function renderTasks(panel, tasks) {
-    var frag = document.createDocumentFragment();
-    tasks.forEach(function (task) {
-      var tile = document.createElement("article");
-      tile.className = "task-tile";
-      tile.innerHTML =
-        '<div class="task-thumb" style="background:' + task.grad + '">' +
-        '<span class="task-glyph">' + task.glyph + "</span></div>" +
-        '<div class="task-caption"><span class="task-id">' + task.id + "</span>" +
-        '<span class="task-name">' + task.name + "</span></div>";
-      frag.appendChild(tile);
-    });
-    panel.innerHTML = "";
-    panel.appendChild(frag);
-  }
-
-  Object.keys(TASKS).forEach(function (key) {
-    var panel = document.querySelector('[data-bench-panel="' + key + '"]');
-    if (panel) renderTasks(panel, TASKS[key]);
-  });
-
-  /* Benchmark tab switching (task grids) */
-  var benchTabs = document.querySelectorAll(".bench-tab[data-bench]");
-  benchTabs.forEach(function (tab) {
-    tab.addEventListener("click", function () {
-      var key = tab.getAttribute("data-bench");
-      benchTabs.forEach(function (t) {
-        var active = t === tab;
-        t.classList.toggle("is-active", active);
-        t.setAttribute("aria-selected", active ? "true" : "false");
-      });
-      document.querySelectorAll("[data-bench-panel]").forEach(function (p) {
-        p.classList.toggle("is-hidden", p.getAttribute("data-bench-panel") !== key);
-      });
-    });
-  });
-
-  /* Leaderboard data */
-  var LEADERBOARD = {
-    "rt3-sim": [
-      { policy: "RDT-1B", type: "VLA", score: 71.4 },
-      { policy: "Pi0", type: "VLA", score: 68.2 },
-      { policy: "OpenVLA", type: "VLA", score: 61.9 },
-      { policy: "Diffusion Policy", type: "IL", score: 57.3 },
-      { policy: "Octo-Base", type: "VLA", score: 52.8 },
-      { policy: "ACT", type: "IL", score: 48.6 }
-    ],
-    "rt3-real": [
-      { policy: "RDT-1B", type: "VLA", score: 63.0 },
-      { policy: "Pi0", type: "VLA", score: 59.5 },
-      { policy: "Diffusion Policy", type: "IL", score: 51.1 },
-      { policy: "OpenVLA", type: "VLA", score: 47.8 },
-      { policy: "ACT", type: "IL", score: 42.2 }
-    ],
-    "rt2-sim": [
-      { policy: "RDT-1B", type: "VLA", score: 74.9 },
-      { policy: "Diffusion Policy", type: "IL", score: 66.1 },
-      { policy: "Pi0", type: "VLA", score: 64.7 },
-      { policy: "Octo-Base", type: "VLA", score: 55.0 },
-      { policy: "ACT", type: "IL", score: 50.4 }
-    ]
-  };
-
-  var lbBody = document.getElementById("leaderboard-body");
-  var currentLb = "rt3-sim";
-
-  function renderLeaderboard(key) {
-    if (!lbBody) return;
-    var rows = LEADERBOARD[key].slice().sort(function (a, b) {
-      return b.score - a.score;
-    });
-    var max = rows.length ? rows[0].score : 100;
-    lbBody.innerHTML = rows.map(function (r, i) {
-      var medal = i === 0 ? "gold" : i === 1 ? "silver" : i === 2 ? "bronze" : "";
-      var pct = Math.round((r.score / max) * 100);
-      return (
-        "<tr>" +
-        '<td class="lb-rank"><span class="lb-rank-badge ' + medal + '">' + (i + 1) + "</span></td>" +
-        '<td><span class="lb-policy">' + r.policy + "</span></td>" +
-        '<td><span class="lb-type">' + r.type + "</span></td>" +
-        '<td class="lb-num"><span class="lb-score">' +
-        '<span class="lb-bar"><span style="width:' + pct + '%"></span></span>' +
-        '<span class="lb-score-val">' + r.score.toFixed(1) + "%</span></span></td>" +
-        "</tr>"
-      );
-    }).join("");
-  }
-
-  renderLeaderboard(currentLb);
-
-  var lbTabs = document.querySelectorAll(".bench-tab[data-lb]");
-  lbTabs.forEach(function (tab) {
-    tab.addEventListener("click", function () {
-      currentLb = tab.getAttribute("data-lb");
-      lbTabs.forEach(function (t) {
-        var active = t === tab;
-        t.classList.toggle("is-active", active);
-        t.setAttribute("aria-selected", active ? "true" : "false");
-      });
-      renderLeaderboard(currentLb);
-    });
-  });
-
-  /* Export leaderboard as LaTeX table */
-  var exportBtn = document.getElementById("export-tex");
-  if (exportBtn) {
-    exportBtn.addEventListener("click", function (e) {
-      e.preventDefault();
-      var rows = LEADERBOARD[currentLb].slice().sort(function (a, b) {
-        return b.score - a.score;
-      });
-      var tex =
-        "\\begin{tabular}{cllr}\n\\toprule\n# & Policy & Type & Success (\\%) \\\\\n\\midrule\n" +
-        rows.map(function (r, i) {
-          return (i + 1) + " & " + r.policy + " & " + r.type + " & " + r.score.toFixed(1);
-        }).join(" \\\\\n") +
-        " \\\\\n\\bottomrule\n\\end{tabular}";
-      navigator.clipboard.writeText(tex).then(function () {
-        var orig = exportBtn.textContent;
-        exportBtn.textContent = "TeX Copied!";
-        exportBtn.classList.add("copied");
-        setTimeout(function () {
-          exportBtn.textContent = orig;
-          exportBtn.classList.remove("copied");
-        }, 2000);
-      });
-    });
-  }
-
-  /* Animated stat counters */
-  var counters = document.querySelectorAll(".stat-num[data-count]");
-  if (counters.length && "IntersectionObserver" in window) {
-    var animate = function (el) {
-      var target = parseInt(el.getAttribute("data-count"), 10);
-      var suffix = /\+/.test(el.textContent) ? "+" : "";
-      var start = null;
-      var dur = 1100;
-      var step = function (ts) {
-        if (!start) start = ts;
-        var p = Math.min((ts - start) / dur, 1);
-        var eased = 1 - Math.pow(1 - p, 3);
-        el.textContent = Math.round(eased * target) + suffix;
-        if (p < 1) requestAnimationFrame(step);
-      };
-      requestAnimationFrame(step);
-    };
-    var io = new IntersectionObserver(function (entries) {
+    var spy = new IntersectionObserver(function (entries) {
       entries.forEach(function (entry) {
-        if (entry.isIntersecting) {
-          animate(entry.target);
-          io.unobserve(entry.target);
-        }
+        if (entry.isIntersecting) activate(linkFor[entry.target.id]);
       });
-    }, { threshold: 0.5 });
-    counters.forEach(function (c) { io.observe(c); });
+    }, { rootMargin: "-20% 0px -70% 0px" });
+    Object.keys(linkFor).forEach(function (id) {
+      var el = document.getElementById(id);
+      if (el) spy.observe(el);
+    });
+    // Bottom of page: force the last section active, since it may
+    // never reach the observer band when the page is short.
+    var lastId = Object.keys(linkFor).pop();
+    window.addEventListener("scroll", function () {
+      var nearBottom = window.innerHeight + window.scrollY >= document.body.scrollHeight - 4;
+      if (nearBottom) activate(linkFor[lastId]);
+    }, { passive: true });
+  }
+
+  /* Copy BibTeX */
+  var btn = document.getElementById("copy-citation");
+  if (btn) {
+    btn.addEventListener("click", function () {
+      var block = document.querySelector("#citation-bibtex code");
+      if (!block) return;
+      var label = btn.textContent;
+      navigator.clipboard.writeText(block.textContent.trim()).then(function () {
+        btn.textContent = "Copied";
+        btn.classList.add("copied");
+        setTimeout(function () {
+          btn.textContent = label;
+          btn.classList.remove("copied");
+        }, 1600);
+      });
+    });
+  }
+
+  /* Policy marquee */
+  var POLICIES = [
+    { name: "A1", logo: "A1.png" },
+    { name: "AHA-WAM", logo: "AHA-WAM.png" },
+    { name: "ABot-M0", logo: "ABot-M0.png" },
+    { name: "ACT", logo: "ACT.png" },
+    { name: "Being-H0.5", logo: "being-beyond.png" },
+    { name: "Dexbotic-DM0", logo: "DM0.png" },
+    { name: "Dexora-1B", logo: "Dexora-1B.png" },
+    { name: "Diffusion Policy", logo: null },
+    { name: "DreamZero", logo: null },
+    { name: "EventVLA", logo: "EventVLA.png" },
+    { name: "FastWAM", logo: "Fast-WAM.png" },
+    { name: "G0.5", logo: "GalaxeaVLA.png" },
+    { name: "G0", logo: "GalaxeaVLA.png" },
+    { name: "GigaWorld-Policy", logo: "GigaWorld-Policy-0.png" },
+    { name: "GO-1", logo: "GO-1.png" },
+    { name: "GR00T-N1.7", logo: "GROOT-N1.7.png" },
+    { name: "H-RDT", logo: "H-RDT.png" },
+    { name: "Hy-Embodied-0.5-VLA", logo: "Hy-Embodied-0.5-VLA.png" },
+    { name: "InternVLA-A1", logo: "InternVLA-A1.png" },
+    { name: "InternVLA-A1.5", logo: "InternVLA-A1.5.png" },
+    { name: "LDA-1B", logo: "LDA-1B.png" },
+    { name: "LingBot-VA", logo: "lingbot.png" },
+    { name: "LingBot-VLA", logo: "LingBot-VLA.png" },
+    { name: "Mem-0", logo: "hku.png" },
+    { name: "MolmoAct2", logo: "MolmoAct2.png" },
+    { name: "OpenVLA-OFT", logo: "OpenVLA-OFT.png" },
+    { name: "π0", logo: "Pi-0.png" },
+    { name: "π0.5", logo: "Pi-05.png" },
+    { name: "VLAct", logo: "VLAct.png" },
+    { name: "RDT-1B", logo: "RDT.png" },
+    { name: "RISE", logo: null },
+    { name: "SmolVLA", logo: "SmolVLA.png" },
+    { name: "Spatial Forcing", logo: "Spatial_Forcing.png" },
+    { name: "Spirit v1.5", logo: "Spirit_v1.5.png" },
+    { name: "StarVLA", logo: "StarVLA.png" },
+    { name: "TinyVLA", logo: "TinyVLA.png" },
+    { name: "X-VLA", logo: "X-VLA.png" },
+    { name: "X-WAM", logo: "X-WAM.png" },
+    { name: "Xiaomi-Robotics-0", logo: "Xiaomi-Robotics-0.png" },
+    { name: "Xiaomi-Robotics-1", logo: "Xiaomi-Robotics-1.png" },
+    { name: "UniT", logo: "XPeng.png" },
+    { name: "RxBrain", logo: "rldx.png" }
+  ];
+
+  var REPO = "https://github.com/XPolicyLab/XPolicyLab/tree/main/policy/";
+  var LOGO_BASE = "assets/logos/";
+  var SPEED = 30; // px/sec
+
+  function policySlug(name) {
+    return name.replace(/π/g, "Pi_").replace(/[^A-Za-z0-9]+/g, "_").replace(/^_+|_+$/g, "");
+  }
+
+  var stage = document.getElementById("marquee-stage");
+  if (!stage) return;
+
+  var nRows = 4;
+  var perRow = Math.ceil(POLICIES.length / nRows);
+
+  for (var r = 0; r < nRows; r++) {
+    var rowPolicies = POLICIES.slice(r * perRow, (r + 1) * perRow);
+    if (!rowPolicies.length) continue;
+
+    var row = document.createElement("div");
+    row.className = "marquee-row";
+
+    var track = document.createElement("div");
+    track.className = "marquee-track";
+
+    var strip = document.createElement("div");
+    strip.style.display = "inline-flex";
+    strip.style.alignItems = "center";
+
+    rowPolicies.forEach(function (p) {
+      var a = document.createElement("a");
+      a.className = "marquee-item";
+      a.href = REPO + policySlug(p.name);
+      a.target = "_blank";
+      a.rel = "noopener noreferrer";
+      if (p.logo) {
+        var img = document.createElement("img");
+        img.src = LOGO_BASE + p.logo;
+        img.alt = "";
+        img.loading = "lazy";
+        a.appendChild(img);
+      }
+      var span = document.createElement("span");
+      span.textContent = p.name;
+      a.appendChild(span);
+      strip.appendChild(a);
+    });
+
+    track.appendChild(strip);
+    row.appendChild(track);
+    stage.appendChild(row);
+
+    (function (track, strip) {
+      requestAnimationFrame(function () {
+        var stripW = strip.offsetWidth || 800;
+        var vw = stage.clientWidth || 800;
+        var copies = Math.max(2, Math.ceil(vw / Math.max(stripW, 1)) + 1);
+        for (var c = 1; c < copies; c++) {
+          track.appendChild(strip.cloneNode(true));
+        }
+        var dur = Math.max(20, stripW / SPEED);
+        track.style.setProperty("--dur", dur.toFixed(2) + "s");
+        track.style.setProperty("--shift", stripW + "px");
+      });
+    })(track, strip);
   }
 })();
