@@ -104,7 +104,15 @@
   var stage = document.getElementById("marquee-stage");
   if (!stage) return;
 
-  var nRows = 4;
+  // Shuffle so rows look staggered rather than grouped by the source order.
+  for (var i = POLICIES.length - 1; i > 0; i--) {
+    var j = Math.floor(Math.random() * (i + 1));
+    var tmp = POLICIES[i];
+    POLICIES[i] = POLICIES[j];
+    POLICIES[j] = tmp;
+  }
+
+  var nRows = 6;
   var perRow = Math.ceil(POLICIES.length / nRows);
 
   for (var r = 0; r < nRows; r++) {
@@ -152,7 +160,7 @@
         for (var c = 1; c < copies; c++) {
           track.appendChild(strip.cloneNode(true));
         }
-        var dur = Math.max(20, stripW / SPEED);
+        var dur = Math.max(10, stripW / SPEED);
         track.style.setProperty("--dur", dur.toFixed(2) + "s");
         track.style.setProperty("--shift", stripW + "px");
       });
