@@ -16,8 +16,11 @@
   <link rel="icon" href="assets/favicon.png" type="image/png">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="preconnect" href="https://robotwin-platform.github.io">
+  <link rel="alternate" type="application/json" href="https://robotwin-platform.github.io/data/index.json" title="Leaderboard data index">
   <link href="https://fonts.googleapis.com/css2?family=EB+Garamond:wght@400;500;600;700&family=Inter:wght@400;600;700&family=JetBrains+Mono:wght@400;600;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="css/styles.css">
+  <link rel="stylesheet" href="css/leaderboard.css">
 </head>
 <body>
   <div class="page">
@@ -102,12 +105,6 @@
 
         <div class="prose">
           <h2 id="benchmarks">Supported Benchmarks</h2>
-          <p>
-            XPolicyLab is benchmark-agnostic: any benchmark, simulator, or real-robot setup can plug in
-            as an environment client against the same policy-side interface — one adapter per policy,
-            one client per environment. Two public benchmarks are already integrated, and their official
-            leaderboards are powered by XPolicyLab submissions.
-          </p>
           <div class="bench-logos">
             <a href="https://robotwin-platform.github.io/leaderboard" target="_blank" rel="noopener noreferrer">
               <img src="assets/robotwin.png" alt="RoboTwin 2.0">
@@ -116,6 +113,12 @@
               <img src="assets/robodojo.png" alt="RoboDojo">
             </a>
           </div>
+          <p>
+            XPolicyLab is benchmark-agnostic: any benchmark, simulator, or real-robot setup can plug in
+            as an environment client against the same policy-side interface — one adapter per policy,
+            one client per environment. Two public benchmarks are already integrated, and their official
+            leaderboards are powered by XPolicyLab submissions.
+          </p>
           <ul>
             <li>
               <a href="https://robotwin-platform.github.io/leaderboard" target="_blank" rel="noopener noreferrer">RoboTwin 2.0 Leaderboard</a>
@@ -130,12 +133,23 @@
               — 18 physical tasks across three bimanual embodiments: ARX X5, Piper, and Piper X.
             </li>
           </ul>
-
-          <figure class="figure">
+          <figure class="figure figure--70">
             <img src="assets/case.png" alt="Cross-platform evaluation" width="1600" height="527" loading="lazy">
             <figcaption>Fig. 2 — Cross-platform evaluation through a shared codebase and standardized serving interface.</figcaption>
           </figure>
+          <p>
+            The live Top 10 snapshots below are fetched from the official boards on each visit
+            (and refresh every five minutes), so new XPolicyLab submissions appear here without
+            a homepage deploy.
+          </p>
+        </div>
 
+        <div class="lb-stack" id="leaderboards" aria-label="Live leaderboard previews">
+          <div data-xpl-lb="robotwin" data-top="10" data-refresh="300"></div>
+          <div data-xpl-lb="robodojo" data-top="10" data-refresh="300"></div>
+        </div>
+
+        <div class="prose">
           <h2 id="submit">How to contribute a policy</h2>
           <p>
             Community policies are welcome — open a PR that adds <code>policy/&lt;POLICY&gt;/</code>.
@@ -270,6 +284,7 @@ bash eval.sh RoboDojo stack_bowls &lt;ckpt_name&gt; arx_x5 joint 0 0 0 \
           <li><a href="#overview">Overview</a></li>
           <li><a href="#policies">Supported Policies</a></li>
           <li><a href="#benchmarks">Supported Benchmarks</a></li>
+          <li><a href="#leaderboards">Leaderboards</a></li>
           <li><a href="#submit">Contribute</a></li>
           <li><a href="#contributors">Contributors</a></li>
           <li><a href="#citation">Citation</a></li>
@@ -290,5 +305,6 @@ bash eval.sh RoboDojo stack_bowls &lt;ckpt_name&gt; arx_x5 joint 0 0 0 \
   </div>
 
   <script src="js/main.js"></script>
+  <script src="js/leaderboard/widget.js"></script>
 </body>
 </html>

@@ -1,0 +1,25 @@
+{
+  "schema_version": "1.0",
+  "description": "Live leaderboard mounts on xpolicylab.github.io. Rankings are fetched from RoboTwin-published JSON — this file is the local registry, not a score cache.",
+  "index_url": "https://robotwin-platform.github.io/data/index.json",
+  "boards": [
+    {
+      "id": "robotwin",
+      "kind": "robotwin",
+      "name": "RoboTwin 2.0 Leaderboard",
+      "mount": "[data-xpl-lb=robotwin]",
+      "data_url": "https://robotwin-platform.github.io/data/robotwin_leaderboard.json",
+      "page_url": "https://robotwin-platform.github.io/leaderboard",
+      "preview_top_n": 10
+    },
+    {
+      "id": "robodojo",
+      "kind": "robodojo",
+      "name": "RoboDojo Sim Leaderboard",
+      "mount": "[data-xpl-lb=robodojo]",
+      "data_url": "https://robotwin-platform.github.io/data/robodojo_leaderboard.json",
+      "page_url": "https://robodojo-benchmark.com/LeaderBoard",
+      "preview_top_n": 10
+    }
+  ]
+}

@@ -16,7 +16,10 @@ Open [http://localhost:8080](http://localhost:8080).
 ├── index.html
 ├── contributors.html          # redirects to index
 ├── css/styles.css
+├── css/leaderboard.css        # RoboTwin / RoboDojo Top 10 widgets
 ├── js/main.js
+├── js/leaderboard/widget.js   # live-sync board mounts
+├── data/boards.json           # registry of remote board URLs
 └── assets/
     ├── logo.png
     ├── booth_transparent.png  # real-eval cell
@@ -27,6 +30,22 @@ Open [http://localhost:8080](http://localhost:8080).
         ├── fig2.png           # infrastructure
         └── fig3.png           # cross-platform eval
 ```
+
+## Live leaderboards
+
+The homepage mounts two Top 10 widgets that fetch official JSON on each visit:
+
+- RoboTwin 2.0: `https://robotwin-platform.github.io/data/robotwin_leaderboard.json`
+- RoboDojo Sim: `https://robotwin-platform.github.io/data/robodojo_leaderboard.json`
+
+Drop another mount anywhere:
+
+```html
+<div data-xpl-lb="robotwin" data-top="10" data-refresh="300"></div>
+<div data-xpl-lb="robodojo" data-top="10" data-refresh="300"></div>
+```
+
+`data-refresh` is seconds between refetches (omit to load once). Override `data-url` / `data-page` / `data-top` per mount if a later page needs a different source.
 
 ## Links
 
