@@ -19,8 +19,8 @@
   <link rel="preconnect" href="https://robotwin-platform.github.io">
   <link rel="alternate" type="application/json" href="https://robotwin-platform.github.io/data/index.json" title="Leaderboard data index">
   <link href="https://fonts.googleapis.com/css2?family=EB+Garamond:wght@400;500;600;700&family=Inter:wght@400;600;700&family=JetBrains+Mono:wght@400;600;700&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="css/styles.css">
-  <link rel="stylesheet" href="css/leaderboard.css">
+  <link rel="stylesheet" href="css/styles.css?v=48b">
+  <link rel="stylesheet" href="css/leaderboard.css?v=53">
 </head>
 <body>
   <div class="page">
@@ -80,9 +80,9 @@
             execution, so each side retains its native stack and may run locally or remotely.
           </p>
           <p>
-            As of August 2026, the ecosystem integrates <strong>42</strong> robot policies and standardizes
+            As of September 2026, the ecosystem integrates <strong>48</strong> robot policies and standardizes
             installation, debugging, serving, and evaluation. The same adapters serve RoboTwin,
-            RoboDojo simulation, and standardized real-robot evaluation.
+            RoboDojo simulation, RMBench, and standardized real-robot evaluation.
           </p>
 
           <figure class="figure">
@@ -92,8 +92,83 @@
 
           <h2 id="policies">Supported Policies</h2>
           <p>
-            42 policies are currently integrated, spanning VLA, world-action, imitation-learning,
+            48 policies are currently integrated, spanning VLA, world-action, imitation-learning,
             and memory-augmented families. Click any model to view its adapter.
+          </p>
+          <div class="policy-table-wrap">
+            <table class="policy-table">
+              <tbody>
+                <tr>
+                  <td><a href="https://github.com/XPolicyLab/XPolicyLab/tree/main/policy/A1" target="_blank" rel="noopener noreferrer">A1</a></td>
+                  <td><a href="https://github.com/XPolicyLab/XPolicyLab/tree/main/policy/AHA_WAM" target="_blank" rel="noopener noreferrer">AHA-WAM</a></td>
+                  <td><a href="https://github.com/XPolicyLab/XPolicyLab/tree/main/policy/Abot_M0" target="_blank" rel="noopener noreferrer">ABot-M0</a></td>
+                  <td><a href="https://github.com/XPolicyLab/XPolicyLab/tree/main/policy/Being_H05" target="_blank" rel="noopener noreferrer">Being-H05</a></td>
+                  <td><a href="https://github.com/XPolicyLab/XPolicyLab/tree/main/policy/Dexbotic_DM0" target="_blank" rel="noopener noreferrer">DM0</a></td>
+                  <td><a href="https://github.com/XPolicyLab/XPolicyLab/tree/main/policy/Dexora_1B" target="_blank" rel="noopener noreferrer">Dexora-1B</a></td>
+                </tr>
+                <tr>
+                  <td><a href="https://github.com/XPolicyLab/XPolicyLab/tree/main/policy/DreamZero" target="_blank" rel="noopener noreferrer">DreamZero</a></td>
+                  <td><a href="https://github.com/XPolicyLab/XPolicyLab/tree/main/policy/EventVLA" target="_blank" rel="noopener noreferrer">EventVLA</a></td>
+                  <td><a href="https://github.com/XPolicyLab/XPolicyLab/tree/main/policy/FastWAM" target="_blank" rel="noopener noreferrer">FastWAM</a></td>
+                  <td><a href="https://github.com/XPolicyLab/XPolicyLab/tree/main/policy/GalaxeaVLA" target="_blank" rel="noopener noreferrer">G0</a></td>
+                  <td><a href="https://github.com/XPolicyLab/XPolicyLab/tree/main/policy/G05" target="_blank" rel="noopener noreferrer">G0.5</a></td>
+                  <td><a href="https://github.com/XPolicyLab/XPolicyLab/tree/main/policy/GO1" target="_blank" rel="noopener noreferrer">GO-1</a></td>
+                </tr>
+                <tr>
+                  <td><a href="https://github.com/XPolicyLab/XPolicyLab/tree/main/policy/GR00T_N17" target="_blank" rel="noopener noreferrer">GR00T-N1.7</a></td>
+                  <td><a href="https://github.com/XPolicyLab/XPolicyLab/tree/main/policy/GigaWorldPolicy" target="_blank" rel="noopener noreferrer">GigaWorld-Policy</a></td>
+                  <td><a href="https://github.com/XPolicyLab/XPolicyLab/tree/main/policy/H_RDT" target="_blank" rel="noopener noreferrer">H-RDT</a></td>
+                  <td><a href="https://github.com/XPolicyLab/XPolicyLab/tree/main/policy/Hy_Embodied_05_VLA" target="_blank" rel="noopener noreferrer">Hy-Embodied-0.5-VLA</a></td>
+                  <td><a href="https://github.com/XPolicyLab/XPolicyLab/tree/main/policy/InternVLA_A1" target="_blank" rel="noopener noreferrer">InternVLA-A1</a></td>
+                  <td><a href="https://github.com/XPolicyLab/XPolicyLab/tree/main/policy/InternVLA_A1_5" target="_blank" rel="noopener noreferrer">InternVLA-A1.5</a></td>
+                </tr>
+                <tr>
+                  <td><a href="https://github.com/XPolicyLab/XPolicyLab/tree/main/policy/LDA_1B" target="_blank" rel="noopener noreferrer">LDA-1B</a></td>
+                  <td><a href="https://github.com/XPolicyLab/XPolicyLab/tree/main/policy/LingBot_VA" target="_blank" rel="noopener noreferrer">LingBot-VA</a></td>
+                  <td><a href="https://github.com/XPolicyLab/XPolicyLab/tree/main/policy/LingBot_VLA" target="_blank" rel="noopener noreferrer">LingBot-VLA</a></td>
+                  <td><a href="https://github.com/XPolicyLab/XPolicyLab/tree/main/policy/Meituan_Robotics_0" target="_blank" rel="noopener noreferrer">Meituan-Robotics-0</a></td>
+                  <td><a href="https://github.com/XPolicyLab/XPolicyLab/tree/main/policy/Mem_0" target="_blank" rel="noopener noreferrer">Mem-0</a></td>
+                  <td><a href="https://github.com/XPolicyLab/XPolicyLab/tree/main/policy/MolmoAct2" target="_blank" rel="noopener noreferrer">MolmoAct2</a></td>
+                </tr>
+                <tr>
+                  <td><a href="https://github.com/XPolicyLab/XPolicyLab/tree/main/policy/OLA_SEM" target="_blank" rel="noopener noreferrer">OLA-SEM</a></td>
+                  <td><a href="https://github.com/XPolicyLab/XPolicyLab/tree/main/policy/OpenDM" target="_blank" rel="noopener noreferrer">OpenDM</a></td>
+                  <td><a href="https://github.com/XPolicyLab/XPolicyLab/tree/main/policy/OpenVLA_OFT" target="_blank" rel="noopener noreferrer">OpenVLA-OFT</a></td>
+                  <td><a href="https://github.com/XPolicyLab/XPolicyLab/tree/main/policy/OpenWAM" target="_blank" rel="noopener noreferrer">OpenWAM</a></td>
+                  <td><a href="https://github.com/XPolicyLab/XPolicyLab/tree/main/policy/Pi_0" target="_blank" rel="noopener noreferrer">π0</a></td>
+                  <td><a href="https://github.com/XPolicyLab/XPolicyLab/tree/main/policy/Pi_05" target="_blank" rel="noopener noreferrer">π0.5</a></td>
+                </tr>
+                <tr>
+                  <td><a href="https://github.com/XPolicyLab/XPolicyLab/tree/main/policy/Pi_0_Fast" target="_blank" rel="noopener noreferrer">π0-Fast</a></td>
+                  <td><a href="https://github.com/XPolicyLab/XPolicyLab/tree/main/policy/RDT_1B" target="_blank" rel="noopener noreferrer">RDT-1B</a></td>
+                  <td><a href="https://github.com/XPolicyLab/XPolicyLab/tree/main/policy/RISE" target="_blank" rel="noopener noreferrer">RISE</a></td>
+                  <td><a href="https://github.com/XPolicyLab/XPolicyLab/tree/main/policy/SmolVLA" target="_blank" rel="noopener noreferrer">SmolVLA</a></td>
+                  <td><a href="https://github.com/XPolicyLab/XPolicyLab/tree/main/policy/Spatial_Forcing" target="_blank" rel="noopener noreferrer">Spatial Forcing</a></td>
+                  <td><a href="https://github.com/XPolicyLab/XPolicyLab/tree/main/policy/Spirit_v15" target="_blank" rel="noopener noreferrer">Spirit v1.5</a></td>
+                </tr>
+                <tr>
+                  <td><a href="https://github.com/XPolicyLab/XPolicyLab/tree/main/policy/TinyVLA" target="_blank" rel="noopener noreferrer">TinyVLA</a></td>
+                  <td><a href="https://github.com/XPolicyLab/XPolicyLab/tree/main/policy/X_VLA" target="_blank" rel="noopener noreferrer">X-VLA</a></td>
+                  <td><a href="https://github.com/XPolicyLab/XPolicyLab/tree/main/policy/X_WAM" target="_blank" rel="noopener noreferrer">X-WAM</a></td>
+                  <td><a href="https://github.com/XPolicyLab/XPolicyLab/tree/main/policy/Xiaomi_Robotics_0" target="_blank" rel="noopener noreferrer">Xiaomi-Robotics-0</a></td>
+                  <td><a href="https://github.com/XPolicyLab/XPolicyLab/tree/main/policy/Xiaomi_Robotics_1" target="_blank" rel="noopener noreferrer">Xiaomi-Robotics-1</a></td>
+                  <td><a href="https://github.com/XPolicyLab/XPolicyLab/tree/main/policy/starVLA" target="_blank" rel="noopener noreferrer">StarVLA</a></td>
+                </tr>
+                <tr>
+                  <td><a href="https://github.com/XPolicyLab/XPolicyLab/tree/main/policy/ACT" target="_blank" rel="noopener noreferrer">ACT</a></td>
+                  <td><a href="https://github.com/XPolicyLab/XPolicyLab/tree/main/policy/DP" target="_blank" rel="noopener noreferrer">DP</a></td>
+                  <td><a href="https://github.com/XPolicyLab/XPolicyLab/tree/main/policy/Evo_1" target="_blank" rel="noopener noreferrer">Evo-1</a></td>
+                  <td><a href="https://github.com/XPolicyLab/XPolicyLab/tree/main/policy/InternW0_delta" target="_blank" rel="noopener noreferrer">InternW0_delta</a></td>
+                  <td><a href="https://github.com/XPolicyLab/XPolicyLab/tree/main/policy/KinRT" target="_blank" rel="noopener noreferrer">KinRT</a></td>
+                  <td><a href="https://github.com/XPolicyLab/XPolicyLab/tree/main/policy/PatchWAM" target="_blank" rel="noopener noreferrer">PatchWAM-Lite</a></td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+          <p>
+            Plus
+            <a href="https://github.com/XPolicyLab/XPolicyLab/tree/main/policy/demo_policy" target="_blank" rel="noopener noreferrer">demo_policy</a>
+            as the minimal reference adapter.
           </p>
         </div>
 
@@ -109,15 +184,15 @@
             <a href="https://robotwin-platform.github.io/leaderboard" target="_blank" rel="noopener noreferrer">
               <img src="assets/robotwin.png" alt="RoboTwin 2.0">
             </a>
-            <a href="https://robodojo-benchmark.com/LeaderBoard" target="_blank" rel="noopener noreferrer">
+            <a href="https://robodojo-benchmark.com/leaderboard" target="_blank" rel="noopener noreferrer">
               <img src="assets/robodojo.png" alt="RoboDojo">
             </a>
           </div>
           <p>
             XPolicyLab is benchmark-agnostic: any benchmark, simulator, or real-robot setup can plug in
             as an environment client against the same policy-side interface — one adapter per policy,
-            one client per environment. Two public benchmarks are already integrated, and their official
-            leaderboards are powered by XPolicyLab submissions.
+            one client per environment. Three public benchmarks are already integrated, and the official
+            RoboTwin and RoboDojo leaderboards are powered by XPolicyLab submissions.
           </p>
           <ul>
             <li>
@@ -125,28 +200,32 @@
               — bimanual manipulation across 50 tasks under clean and randomized settings; results reproduced via the XPolicyLab standard interface.
             </li>
             <li>
-              <a href="https://robodojo-benchmark.com/LeaderBoard" target="_blank" rel="noopener noreferrer">RoboDojo-sim Leaderboard</a>
+              <a href="https://robodojo-benchmark.com/leaderboard" target="_blank" rel="noopener noreferrer">RoboDojo-sim Leaderboard</a>
               — 42 simulation tasks across five capability dimensions: Generalization, Precision, Long-Horizon, Memory, and Open.
             </li>
             <li>
-              <a href="https://robodojo-benchmark.com/LeaderBoard" target="_blank" rel="noopener noreferrer">RoboDojo-real Leaderboard</a>
+              <a href="https://robodojo-benchmark.com/leaderboard" target="_blank" rel="noopener noreferrer">RoboDojo-real Leaderboard</a>
               — 18 physical tasks across three bimanual embodiments: ARX X5, Piper, and Piper X.
             </li>
+            <li>
+              <a href="https://rmbench.github.io/" target="_blank" rel="noopener noreferrer">RMBench</a>
+              — memory-dependent manipulation built on RoboTwin 2.0, with nine dual-arm tasks spanning levels of task memory complexity.
+            </li>
           </ul>
-          <figure class="figure figure--70">
-            <img src="assets/case.png" alt="Cross-platform evaluation" width="1600" height="527" loading="lazy">
+          <figure class="figure">
+            <img src="assets/case.png" alt="Cross-platform evaluation via XPolicyLab across RoboTwin, RoboDojo, and RMBench" width="1024" height="286" loading="lazy">
             <figcaption>Fig. 2 — Cross-platform evaluation through a shared codebase and standardized serving interface.</figcaption>
           </figure>
           <p>
-            The live Top 10 snapshots below are fetched from the official boards on each visit
-            (and refresh every five minutes), so new XPolicyLab submissions appear here without
-            a homepage deploy.
+            RoboTwin and RoboDojo Real sync live from the published JSON. RoboDojo Sim mirrors
+            the official board as of 28 September 2026 (51 models).
           </p>
         </div>
 
         <div class="lb-stack" id="leaderboards" aria-label="Live leaderboard previews">
           <div data-xpl-lb="robotwin" data-top="10" data-refresh="300"></div>
           <div data-xpl-lb="robodojo" data-top="10" data-refresh="300"></div>
+          <div data-xpl-lb="robodojo-real" data-top="10" data-refresh="300"></div>
         </div>
 
         <div class="prose">
@@ -188,7 +267,7 @@ bash eval.sh RoboDojo stack_bowls &lt;ckpt_name&gt; arx_x5 joint 0 0 0 \
           </p>
 
           <h2 id="contributors">Contributors</h2>
-          <p class="update-badge"><strong>Last updated:</strong> 2026.8.11</p>
+          <p class="update-badge"><strong>Last updated:</strong> 2026.10.1</p>
           <p>
             XPolicyLab is a collaborative open-source project led by
             <strong>MMLab@HKU</strong> and <strong>THU</strong>, with project leadership provided by Tianxing Chen.
@@ -304,7 +383,8 @@ bash eval.sh RoboDojo stack_bowls &lt;ckpt_name&gt; arx_x5 joint 0 0 0 \
     </div>
   </div>
 
-  <script src="js/main.js"></script>
-  <script src="js/leaderboard/widget.js"></script>
+  <script src="js/main.js?v=48"></script>
+  <script src="js/leaderboard/robodojo_sim.js?v=53"></script>
+  <script src="js/leaderboard/widget.js?v=53"></script>
 </body>
 </html>

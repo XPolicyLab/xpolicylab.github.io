@@ -4,6 +4,7 @@
 
      <div data-xpl-lb="robotwin" data-top="10" data-refresh="300"></div>
      <div data-xpl-lb="robodojo" data-top="10" data-refresh="300"></div>
+     <div data-xpl-lb="robodojo-real" data-top="10" data-refresh="300"></div>
 */
 (function (global) {
   var XPL = global.XPL = global.XPL || {};
@@ -26,8 +27,17 @@
       title: "RoboDojo Sim",
       kicker: "Leaderboard",
       logo: "assets/robodojo.png",
-      dataUrl: "https://robotwin-platform.github.io/data/robodojo_leaderboard.json",
-      pageUrl: "https://robodojo-benchmark.com/LeaderBoard",
+      dataUrl: "assets/leaderboards/robodojo_sim.json",
+      pageUrl: "https://robodojo-benchmark.com/leaderboard",
+      topN: 10
+    },
+    "robodojo-real": {
+      kind: "robodojo",
+      title: "RoboDojo Real",
+      kicker: "Leaderboard",
+      logo: "assets/robodojo.png",
+      dataUrl: "https://robotwin-platform.github.io/data/robodojo_real_leaderboard.json",
+      pageUrl: "https://robodojo-benchmark.com/leaderboard",
       topN: 10
     }
   };
@@ -47,11 +57,27 @@
     return raw == null || raw === "" ? fallback : raw;
   }
 
+  function resolveUrl(url) {
+    if (!url || /^https?:\/\//i.test(url)) return url;
+    try { return new URL(url, document.baseURI).href; } catch (err) { return url; }
+  }
+
+  function snapshotOf(id) {
+    var pack = global.XPL_LB_SNAPSHOTS;
+    return pack && pack[id] ? pack[id] : null;
+  }
+
   function fetchJson(url) {
-    return fetch(url, { cache: "no-cache" }).then(function (res) {
+    return fetch(resolveUrl(url), { cache: "no-cache" }).then(function (res) {
       if (!res.ok) throw new Error("HTTP " + res.status);
       return res.json();
     });
+  }
+
+  function loadBoardData(cfg) {
+    var snap = snapshotOf(cfg.id);
+    if (snap) return Promise.resolve(snap);
+    return fetchJson(cfg.dataUrl);
   }
 
   function heat(value) {
@@ -76,7 +102,7 @@
   }
 
   function paintLoading(root, cfg) {
-    paintShell(root, "xpl-board--loading xpl-board--" + cfg.kind, headerHtml(cfg, {
+    paintShell(root, "xpl-board--loading xpl-board--" + cfg.kind + " xpl-board--" + cfg.id, headerHtml(cfg, {
       meta: "Syncing official Top " + cfg.topN + "…"
     }) + '<p class="xpl-board__status">Fetching live ranking…</p>');
   }
@@ -108,7 +134,7 @@
   }
 
   function liveHtml(updated) {
-    return '<span class="xpl-board__live" title="Fetched from robotwin-platform.github.io">' +
+    return '<span class="xpl-board__live" title="Official ranking">' +
       '<span class="xpl-board__dot" aria-hidden="true"></span>' +
       "Live" +
       (updated ? ' · <time datetime="' + esc(updated) + '">' + esc(updated) + "</time>" : "") +
@@ -195,12 +221,12 @@
             "<tbody>" + (rows || '<tr><td colspan="7" class="xpl-board__empty">No entries yet.</td></tr>') + "</tbody>" +
           "</table>" +
         "</div>" +
-        '<a class="xpl-board__foot" href="' + esc(cfg.pageUrl) + '" target="_blank" rel="noopener noreferrer">Show full RoboTwin leaderboard</a>'
+        '<a class="xpl-board__foot" href="' + esc(cfg.pageUrl) + '" target="_blank" rel="noopener noreferrer">Show full ' + esc(cfg.title) + " leaderboard</a>"
       );
     }
 
     function load() {
-      return fetchJson(cfg.dataUrl).then(function (json) {
+      return loadBoardData(cfg).then(function (json) {
         data = json;
         if (!sortKey) sortKey = (json.board && json.board.default_ranking) || "avg";
         paint();
@@ -222,9 +248,19 @@
     if (cfg.refresh > 0) setInterval(load, cfg.refresh * 1000);
   }
 
+  function tagSlug(tag) {
+    return String(tag || "all").toLowerCase().replace(/\s+\+\s+/g, "-").replace(/\s+/g, "-");
+  }
+
+  function tagBadge(tag) {
+    if (!tag) return "";
+    return '<span class="xpl-board__tag xpl-board__tag--' + esc(tagSlug(tag)) + '">' + esc(tag) + "</span>";
+  }
+
   function mountRoboDojo(root, cfg) {
     var dim = null;
     var metricId = null;
+    var tagId = null;
     var data = null;
 
     function paint() {
@@ -232,6 +268,7 @@
       var entries = data.entries || [];
       var dims = board.dimensions || [];
       var metrics = board.metrics || [];
+      var tags = board.tags || [];
       var metric = null;
       var i;
       for (i = 0; i < metrics.length; i++) {
@@ -244,7 +281,12 @@
         if (dims[i].id === dim) dimLabel = dims[i].label;
       }
 
-      var sorted = entries.slice().sort(function (a, b) {
+      var filtered = entries;
+      if (tagId && tagId !== "all") {
+        filtered = entries.filter(function (entry) { return entry.tag === tagId; });
+      }
+
+      var sorted = filtered.slice().sort(function (a, b) {
         var ap = a[dim] || [0, 0];
         var bp = b[dim] || [0, 0];
         var alt = 1 - metric.index;
@@ -258,6 +300,9 @@
       }).join("");
       var metricChips = metrics.map(function (m) {
         return chip(m.label, m.id === metric.id, 'data-dj-metric="' + esc(m.id) + '"');
+      }).join("");
+      var tagChips = tags.map(function (t) {
+        return chip(t.label, t.id === tagId, 'data-dj-tag="' + esc(t.id) + '"');
       }).join("");
 
       var heads = dims.map(function (d) {
@@ -275,14 +320,20 @@
         }).join("");
         return '<tr class="' + (rank === 1 ? "is-leader-row" : "") + '">' +
           '<td class="xpl-board__rank' + (rank <= 3 ? " is-top" : "") + '">#' + rank + "</td>" +
-          '<td class="xpl-board__method">' + esc(entry.model) + "</td>" +
+          '<td class="xpl-board__method">' +
+            '<span class="xpl-board__model">' + esc(entry.model) + "</span>" +
+            tagBadge(entry.tag) +
+          "</td>" +
           '<td class="xpl-board__who">' + esc(entry.team) + "</td>" +
           cells +
         "</tr>";
       }).join("");
 
-      paintShell(root, "xpl-board--" + cfg.kind, headerHtml(cfg, {
-        meta: "Top " + cfg.topN + " · Ranked by " + esc(dimLabel) + " · " + esc(metric.label) + " ↓",
+      var tagLabel = tagId && tagId !== "all" ? tagId : "";
+      paintShell(root, "xpl-board--" + cfg.kind + " xpl-board--" + cfg.id, headerHtml(cfg, {
+        meta: "Top " + cfg.topN +
+          (tagLabel ? " · " + esc(tagLabel) : "") +
+          " · Ranked by " + esc(dimLabel) + " · " + esc(metric.label) + " ↓",
         live: liveHtml(board.updated)
       }) +
         '<div class="xpl-board__toolbar">' +
@@ -294,6 +345,11 @@
             '<span class="xpl-board__sort-label">Rank by</span>' +
             '<div class="xpl-board__chips" role="group" aria-label="Sort by metric">' + metricChips + "</div>" +
           "</div>" +
+          (tagChips ?
+            '<div class="xpl-board__sort">' +
+              '<span class="xpl-board__sort-label">Tag</span>' +
+              '<div class="xpl-board__chips" role="group" aria-label="Filter by tag">' + tagChips + "</div>" +
+            "</div>" : "") +
         "</div>" +
         '<div class="xpl-board__scroll">' +
           '<table class="xpl-board__table xpl-board__table--wide">' +
@@ -301,17 +357,18 @@
             "<tbody>" + (rows || '<tr><td colspan="99" class="xpl-board__empty">No entries yet.</td></tr>') + "</tbody>" +
           "</table>" +
         "</div>" +
-        '<a class="xpl-board__foot" href="' + esc(cfg.pageUrl) + '" target="_blank" rel="noopener noreferrer">Show full RoboDojo leaderboard</a>'
+        '<a class="xpl-board__foot" href="' + esc(cfg.pageUrl) + '" target="_blank" rel="noopener noreferrer">Show full ' + esc(cfg.title) + " leaderboard</a>"
       );
     }
 
     function load() {
-      return fetchJson(cfg.dataUrl).then(function (json) {
+      return loadBoardData(cfg).then(function (json) {
         data = json;
         var board = json.board || {};
         var metrics = board.metrics || [];
         if (!dim) dim = board.default_dimension || (board.dimensions && board.dimensions[0] && board.dimensions[0].id);
         if (!metricId) metricId = board.default_metric || (metrics[0] && metrics[0].id);
+        if (!tagId) tagId = board.default_tag || "all";
         paint();
       }).catch(function (err) {
         console.error("RoboDojo leaderboard", err);
@@ -322,12 +379,16 @@
     root.addEventListener("click", function (e) {
       var dimBtn = e.target.closest("[data-dj-dim]");
       var metricBtn = e.target.closest("[data-dj-metric]");
+      var tagBtn = e.target.closest("[data-dj-tag]");
       if (!data) return;
       if (dimBtn) {
         dim = dimBtn.getAttribute("data-dj-dim");
         paint();
       } else if (metricBtn) {
         metricId = metricBtn.getAttribute("data-dj-metric");
+        paint();
+      } else if (tagBtn) {
+        tagId = tagBtn.getAttribute("data-dj-tag");
         paint();
       }
     });

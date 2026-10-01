@@ -32,6 +32,7 @@
 
 .xpl-board--robotwin { --lb-accent: #3f6f58; --lb-accent-soft: rgba(101, 164, 135, 0.14); }
 .xpl-board--robodojo { --lb-accent: #4285f4; --lb-accent-soft: rgba(66, 133, 244, 0.12); }
+.xpl-board--robodojo-real { --lb-accent: #0f766e; --lb-accent-soft: rgba(15, 118, 110, 0.12); }
 
 .xpl-board__head {
   display: flex;
@@ -258,6 +259,59 @@
   text-align: left;
   font-weight: 650;
   letter-spacing: -0.01em;
+  white-space: nowrap;
+}
+
+.xpl-board__model {
+  margin-right: 0.4rem;
+}
+
+.xpl-board__tag {
+  display: inline-block;
+  vertical-align: middle;
+  padding: 0.12rem 0.4rem;
+  border-radius: 0.25rem;
+  font-family: var(--font-mono);
+  font-size: 0.625rem;
+  font-weight: 700;
+  letter-spacing: 0.02em;
+  line-height: 1.2;
+}
+
+.xpl-board__tag--agent {
+  color: #0369a1;
+  background: rgba(14, 165, 233, 0.16);
+  border: 1px solid #0369a1;
+}
+
+.xpl-board__tag--agent-vla {
+  color: #b45309;
+  background: rgba(245, 158, 11, 0.16);
+  border: 1px solid #b45309;
+}
+
+.xpl-board__tag--vla {
+  color: #4338ca;
+  background: rgba(99, 102, 241, 0.14);
+  border: 1px solid #4338ca;
+}
+
+.xpl-board__tag--vlm-wam {
+  color: #be185d;
+  background: rgba(236, 72, 153, 0.14);
+  border: 1px solid #be185d;
+}
+
+.xpl-board__tag--wam {
+  color: #0d9488;
+  background: rgba(20, 184, 166, 0.16);
+  border: 1px solid #0d9488;
+}
+
+.xpl-board__tag--il {
+  color: #7e22ce;
+  background: rgba(168, 85, 247, 0.16);
+  border: 1px solid #7e22ce;
 }
 
 .xpl-board__who {

@@ -49,56 +49,62 @@
 
   /* Policy marquee */
   var POLICIES = [
-    { name: "A1", logo: "A1.png" },
-    { name: "AHA-WAM", logo: "AHA-WAM.png" },
-    { name: "ABot-M0", logo: "ABot-M0.png" },
-    { name: "ACT", logo: "ACT.png" },
-    { name: "Being-H0.5", logo: "being-beyond.png" },
-    { name: "Dexbotic-DM0", logo: "DM0.png" },
-    { name: "Dexora-1B", logo: "Dexora-1B.png" },
-    { name: "Diffusion Policy", logo: "columbia.png" },
-    { name: "DreamZero", logo: "GROOT-N1.7.png" },
-    { name: "EventVLA", logo: "EventVLA.png" },
-    { name: "FastWAM", logo: "Fast-WAM.png" },
-    { name: "G0.5", logo: "GalaxeaVLA.png" },
-    { name: "G0", logo: "GalaxeaVLA.png" },
-    { name: "GigaWorld-Policy", logo: "GigaWorld-Policy-0.png" },
-    { name: "GO-1", logo: "GO-1.png" },
-    { name: "GR00T-N1.7", logo: "GROOT-N1.7.png" },
-    { name: "H-RDT", logo: "H-RDT.png" },
-    { name: "Hy-Embodied-0.5-VLA", logo: "Hy-Embodied-0.5-VLA.png" },
-    { name: "InternVLA-A1", logo: "InternVLA-A1.png" },
-    { name: "InternVLA-A1.5", logo: "InternVLA-A1.5.png" },
-    { name: "LDA-1B", logo: "LDA-1B.png" },
-    { name: "LingBot-VA", logo: "lingbot.png" },
-    { name: "LingBot-VLA", logo: "LingBot-VLA.png" },
-    { name: "Mem-0", logo: "hku.png" },
-    { name: "MolmoAct2", logo: "MolmoAct2.png" },
-    { name: "OpenVLA-OFT", logo: "OpenVLA-OFT.png" },
-    { name: "π0", logo: "Pi-0.png" },
-    { name: "π0.5", logo: "Pi-05.png" },
-    { name: "VLAct", logo: "VLAct.png" },
-    { name: "RDT-1B", logo: "RDT.png" },
-    { name: "RISE", logo: null },
-    { name: "SmolVLA", logo: "SmolVLA.png" },
-    { name: "Spatial Forcing", logo: "Spatial_Forcing.png" },
-    { name: "Spirit v1.5", logo: "Spirit_v1.5.png" },
-    { name: "StarVLA", logo: "StarVLA.png" },
-    { name: "TinyVLA", logo: "TinyVLA.png" },
-    { name: "X-VLA", logo: "X-VLA.png" },
-    { name: "X-WAM", logo: "X-WAM.png" },
-    { name: "Xiaomi-Robotics-0", logo: "Xiaomi-Robotics-0.png" },
-    { name: "Xiaomi-Robotics-1", logo: "Xiaomi-Robotics-1.png" },
-    { name: "UniT", logo: "XPeng.png" },
-    { name: "RxBrain", logo: "rldx.png" }
+    { name: "A1", slug: "A1", logo: "A1.png" },
+    { name: "AHA-WAM", slug: "AHA_WAM", logo: "AHA-WAM.png" },
+    { name: "ABot-M0", slug: "Abot_M0", logo: "ABot-M0.png" },
+    { name: "ACT", slug: "ACT", logo: "ACT.png" },
+    { name: "Being-H05", slug: "Being_H05", logo: "being-beyond.png" },
+    { name: "DM0", slug: "Dexbotic_DM0", logo: "DM0.png" },
+    { name: "DP", slug: "DP", logo: "columbia.png" },
+    { name: "Dexora-1B", slug: "Dexora_1B", logo: "Dexora-1B.png" },
+    { name: "DreamZero", slug: "DreamZero", logo: "GROOT-N1.7.png" },
+    { name: "EventVLA", slug: "EventVLA", logo: "EventVLA.png" },
+    { name: "Evo-1", slug: "Evo_1", logo: null },
+    { name: "FastWAM", slug: "FastWAM", logo: "Fast-WAM.png" },
+    { name: "G0", slug: "GalaxeaVLA", logo: "GalaxeaVLA.png" },
+    { name: "G0.5", slug: "G05", logo: "GalaxeaVLA.png" },
+    { name: "GO-1", slug: "GO1", logo: "GO-1.png" },
+    { name: "GR00T-N1.7", slug: "GR00T_N17", logo: "GROOT-N1.7.png" },
+    { name: "GigaWorld-Policy", slug: "GigaWorldPolicy", logo: "GigaWorld-Policy-0.png" },
+    { name: "H-RDT", slug: "H_RDT", logo: "H-RDT.png" },
+    { name: "Hy-Embodied-0.5-VLA", slug: "Hy_Embodied_05_VLA", logo: "Hy-Embodied-0.5-VLA.png" },
+    { name: "InternVLA-A1", slug: "InternVLA_A1", logo: "InternVLA-A1.png" },
+    { name: "InternVLA-A1.5", slug: "InternVLA_A1_5", logo: "InternVLA-A1.5.png" },
+    { name: "InternW0_delta", slug: "InternW0_delta", logo: null },
+    { name: "KinRT", slug: "KinRT", logo: null },
+    { name: "LDA-1B", slug: "LDA_1B", logo: "LDA-1B.png" },
+    { name: "LingBot-VA", slug: "LingBot_VA", logo: "lingbot.png" },
+    { name: "LingBot-VLA", slug: "LingBot_VLA", logo: "LingBot-VLA.png" },
+    { name: "Meituan-Robotics-0", slug: "Meituan_Robotics_0", logo: null },
+    { name: "Mem-0", slug: "Mem_0", logo: "hku.png" },
+    { name: "MolmoAct2", slug: "MolmoAct2", logo: "MolmoAct2.png" },
+    { name: "OLA-SEM", slug: "OLA_SEM", logo: null },
+    { name: "OpenDM", slug: "OpenDM", logo: null },
+    { name: "OpenVLA-OFT", slug: "OpenVLA_OFT", logo: "OpenVLA-OFT.png" },
+    { name: "OpenWAM", slug: "OpenWAM", logo: null },
+    { name: "PatchWAM-Lite", slug: "PatchWAM", logo: null },
+    { name: "π0", slug: "Pi_0", logo: "Pi-0.png" },
+    { name: "π0.5", slug: "Pi_05", logo: "Pi-05.png" },
+    { name: "π0-Fast", slug: "Pi_0_Fast", logo: "Pi-0.png" },
+    { name: "RDT-1B", slug: "RDT_1B", logo: "RDT.png" },
+    { name: "RISE", slug: "RISE", logo: null },
+    { name: "SmolVLA", slug: "SmolVLA", logo: "SmolVLA.png" },
+    { name: "Spatial Forcing", slug: "Spatial_Forcing", logo: "Spatial_Forcing.png" },
+    { name: "Spirit v1.5", slug: "Spirit_v15", logo: "Spirit_v1.5.png" },
+    { name: "StarVLA", slug: "starVLA", logo: "StarVLA.png" },
+    { name: "TinyVLA", slug: "TinyVLA", logo: "TinyVLA.png" },
+    { name: "X-VLA", slug: "X_VLA", logo: "X-VLA.png" },
+    { name: "X-WAM", slug: "X_WAM", logo: "X-WAM.png" },
+    { name: "Xiaomi-Robotics-0", slug: "Xiaomi_Robotics_0", logo: "Xiaomi-Robotics-0.png" },
+    { name: "Xiaomi-Robotics-1", slug: "Xiaomi_Robotics_1", logo: "Xiaomi-Robotics-1.png" }
   ];
 
   var REPO = "https://github.com/XPolicyLab/XPolicyLab/tree/main/policy/";
   var LOGO_BASE = "assets/logos/";
   var SPEED = 30; // px/sec
 
-  function policySlug(name) {
-    return name.replace(/π/g, "Pi_").replace(/[^A-Za-z0-9]+/g, "_").replace(/^_+|_+$/g, "");
+  function policySlug(p) {
+    return p.slug || p.name.replace(/π/g, "Pi_").replace(/[^A-Za-z0-9]+/g, "_").replace(/^_+|_+$/g, "");
   }
 
   var stage = document.getElementById("marquee-stage");
@@ -132,7 +138,7 @@
     rowPolicies.forEach(function (p) {
       var a = document.createElement("a");
       a.className = "marquee-item";
-      a.href = REPO + policySlug(p.name);
+      a.href = REPO + policySlug(p);
       a.target = "_blank";
       a.rel = "noopener noreferrer";
       if (p.logo) {

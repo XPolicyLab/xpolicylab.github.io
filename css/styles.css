@@ -456,6 +456,43 @@ a {
   text-transform: uppercase;
 }
 
+/* ── Policy table ───────────────────────────────────────────────── */
+.policy-table-wrap {
+  margin: 0 0 var(--space-4);
+  overflow-x: auto;
+}
+
+.policy-table {
+  width: 100%;
+  min-width: 42rem;
+  border-collapse: collapse;
+  table-layout: fixed;
+  font-family: var(--font-mono);
+  font-size: 0.8125rem;
+  line-height: 1.35;
+}
+
+.policy-table td {
+  width: 16.666%;
+  padding: 0.55rem 0.45rem;
+  border: 1px solid rgb(var(--border));
+  text-align: center;
+  vertical-align: middle;
+  word-break: break-word;
+  background: rgb(var(--background));
+}
+
+.policy-table a {
+  color: rgb(var(--foreground));
+  text-decoration: none;
+}
+
+.policy-table a:hover {
+  color: #3078f0;
+  text-decoration: underline;
+  text-underline-offset: 2px;
+}
+
 /* ── Policy marquee ─────────────────────────────────────────────── */
 .policy-marquee {
   position: relative;
@@ -692,6 +729,14 @@ a {
 
   .marquee-fade {
     width: 40px;
+  }
+
+  .policy-table {
+    font-size: 0.7rem;
+  }
+
+  .policy-table td {
+    padding: 0.4rem 0.3rem;
   }
 
   .footer-logos-row {

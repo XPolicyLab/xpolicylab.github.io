@@ -1,6 +1,6 @@
 {
   "schema_version": "1.0",
-  "description": "Live leaderboard mounts on xpolicylab.github.io. Rankings are fetched from RoboTwin-published JSON — this file is the local registry, not a score cache.",
+  "description": "Leaderboard mounts on xpolicylab.github.io. RoboTwin and RoboDojo Real fetch RoboTwin-published JSON; RoboDojo Sim uses the official 2026-09-28 snapshot bundled in js/leaderboard/robodojo_sim.js.",
   "index_url": "https://robotwin-platform.github.io/data/index.json",
   "boards": [
     {
@@ -17,8 +17,20 @@
       "kind": "robodojo",
       "name": "RoboDojo Sim Leaderboard",
       "mount": "[data-xpl-lb=robodojo]",
-      "data_url": "https://robotwin-platform.github.io/data/robodojo_leaderboard.json",
-      "page_url": "https://robodojo-benchmark.com/LeaderBoard",
+      "data_url": "assets/leaderboards/robodojo_sim.json",
+      "snapshot": "js/leaderboard/robodojo_sim.js",
+      "page_url": "https://robodojo-benchmark.com/leaderboard",
+      "updated": "2026-09-28",
+      "note": "Official RoboDojo Sim board (51 models, 2026-09-28). The robotwin-platform mirror is stale (2026-09-05).",
+      "preview_top_n": 10
+    },
+    {
+      "id": "robodojo-real",
+      "kind": "robodojo",
+      "name": "RoboDojo Real Leaderboard",
+      "mount": "[data-xpl-lb=robodojo-real]",
+      "data_url": "https://robotwin-platform.github.io/data/robodojo_real_leaderboard.json",
+      "page_url": "https://robodojo-benchmark.com/leaderboard",
       "preview_top_n": 10
     }
   ]

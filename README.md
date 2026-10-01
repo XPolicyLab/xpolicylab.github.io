@@ -33,16 +33,20 @@ Open [http://localhost:8080](http://localhost:8080).
 
 ## Live leaderboards
 
-The homepage mounts two Top 10 widgets that fetch official JSON on each visit:
+The homepage mounts three Top 10 widgets:
 
-- RoboTwin 2.0: `https://robotwin-platform.github.io/data/robotwin_leaderboard.json`
-- RoboDojo Sim: `https://robotwin-platform.github.io/data/robodojo_leaderboard.json`
+- RoboTwin 2.0 (live): `https://robotwin-platform.github.io/data/robotwin_leaderboard.json`
+- RoboDojo Sim (official 2026-09-28 snapshot, 51 models + type tags): `js/leaderboard/robodojo_sim.js` (fallback `assets/leaderboards/robodojo_sim.json`)
+- RoboDojo Real (live): `https://robotwin-platform.github.io/data/robodojo_real_leaderboard.json`
+
+The robotwin-platform Sim mirror (`robodojo_leaderboard.json`, dated 2026-09-05) is behind the official board at [robodojo-benchmark.com/leaderboard](https://robodojo-benchmark.com/leaderboard).
 
 Drop another mount anywhere:
 
 ```html
 <div data-xpl-lb="robotwin" data-top="10" data-refresh="300"></div>
 <div data-xpl-lb="robodojo" data-top="10" data-refresh="300"></div>
+<div data-xpl-lb="robodojo-real" data-top="10" data-refresh="300"></div>
 ```
 
 `data-refresh` is seconds between refetches (omit to load once). Override `data-url` / `data-page` / `data-top` per mount if a later page needs a different source.
