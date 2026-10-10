@@ -36,10 +36,10 @@ Open [http://localhost:8080](http://localhost:8080).
 The homepage mounts three Top 10 widgets:
 
 - RoboTwin 2.0 (live): `https://robotwin-platform.github.io/data/robotwin_leaderboard.json`
-- RoboDojo Sim (official 2026-09-28 snapshot, 51 models + type tags): `js/leaderboard/robodojo_sim.js` (fallback `assets/leaderboards/robodojo_sim.json`)
-- RoboDojo Real (live): `https://robotwin-platform.github.io/data/robodojo_real_leaderboard.json`
+- RoboDojo Sim (live): `sim` of `https://robodojo-benchmark.com/data/leaderboard.generated.json`; falls back to the bundled 2026-09-28 snapshot `js/leaderboard/robodojo_sim.js`
+- RoboDojo Real (live): `realworld` of the same JSON; falls back to `https://robotwin-platform.github.io/data/robodojo_real_leaderboard.json`
 
-The robotwin-platform Sim mirror (`robodojo_leaderboard.json`, dated 2026-09-05) is behind the official board at [robodojo-benchmark.com/leaderboard](https://robodojo-benchmark.com/leaderboard).
+The official JSON carries no model-type tags, so the live RoboDojo boards have no tag filter.
 
 Drop another mount anywhere:
 

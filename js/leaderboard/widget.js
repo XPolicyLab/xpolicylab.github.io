@@ -1,6 +1,6 @@
 /* Modular Top-10 leaderboard widgets for XPolicyLab.
-   Data is fetched live from RoboTwin-published JSON so the homepage
-   stays in sync without a redeploy. Mount any empty node:
+   Data is fetched live from the official RoboTwin and RoboDojo JSON so the
+   homepage stays in sync without a redeploy. Mount any empty node:
 
      <div data-xpl-lb="robotwin" data-top="10" data-refresh="300"></div>
      <div data-xpl-lb="robodojo" data-top="10" data-refresh="300"></div>
@@ -11,6 +11,26 @@
   var LB = XPL.Leaderboard = XPL.Leaderboard || {};
 
   var INDEX_URL = "https://robotwin-platform.github.io/data/index.json";
+  var ROBODOJO_URL = "https://robodojo-benchmark.com/data/leaderboard.generated.json";
+
+  // Column order and labels follow robodojo-benchmark.com/leaderboard.
+  var ROBODOJO_DIMENSIONS = {
+    sim: [
+      { id: "average", label: "Average" },
+      { id: "sft", label: "Avg. (w/o Open)" },
+      { id: "generalization", label: "Generalization" },
+      { id: "precision", label: "Precision" },
+      { id: "longHorizon", label: "Long-Horizon" },
+      { id: "memory", label: "Memory" },
+      { id: "open", label: "Open" }
+    ],
+    realworld: [
+      { id: "average", label: "Average" },
+      { id: "arxX5", label: "ARX X5" },
+      { id: "piper", label: "Piper" },
+      { id: "piperX", label: "Piper X" }
+    ]
+  };
 
   var BOARDS = {
     robotwin: {
@@ -27,7 +47,8 @@
       title: "RoboDojo Sim",
       kicker: "Leaderboard",
       logo: "assets/robodojo.png",
-      dataUrl: "assets/leaderboards/robodojo_sim.json",
+      dataUrl: ROBODOJO_URL,
+      section: "sim",
       pageUrl: "https://robodojo-benchmark.com/leaderboard",
       topN: 10
     },
@@ -36,7 +57,9 @@
       title: "RoboDojo Real",
       kicker: "Leaderboard",
       logo: "assets/robodojo.png",
-      dataUrl: "https://robotwin-platform.github.io/data/robodojo_real_leaderboard.json",
+      dataUrl: ROBODOJO_URL,
+      section: "realworld",
+      fallbackUrl: "https://robotwin-platform.github.io/data/robodojo_real_leaderboard.json",
       pageUrl: "https://robodojo-benchmark.com/leaderboard",
       topN: 10
     }
@@ -74,10 +97,49 @@
     });
   }
 
+  // Convert the official leaderboard.generated.json section into the
+  // { board, entries } shape the RoboDojo widget renders.
+  function fromRoboDojoGenerated(json, cfg) {
+    var rows = json && json[cfg.section];
+    var dims = ROBODOJO_DIMENSIONS[cfg.section];
+    if (!dims || !Array.isArray(rows) || !rows.length) {
+      throw new Error("No " + cfg.section + " entries");
+    }
+    var entries = rows.map(function (row) {
+      var entry = { model: row.model, team: row.team || "—" };
+      dims.forEach(function (d) {
+        var cell = row.dimensions && row.dimensions[d.id];
+        if (cell) entry[d.id] = [Number(cell.score), Number(cell.successRate)];
+      });
+      return entry;
+    });
+    return {
+      board: {
+        dimensions: dims,
+        metrics: [
+          { id: "score", index: 0, label: "Score" },
+          { id: "sr", index: 1, label: "SR", unit: "%" }
+        ],
+        default_dimension: "average",
+        default_metric: "score",
+        updated: json.updatedAt && (json.updatedAt.label || json.updatedAt.iso)
+      },
+      entries: entries
+    };
+  }
+
+  // Live official data first; the bundled snapshot or a mirror only if it fails.
   function loadBoardData(cfg) {
     var snap = snapshotOf(cfg.id);
-    if (snap) return Promise.resolve(snap);
-    return fetchJson(cfg.dataUrl);
+    if (!cfg.section) return snap ? Promise.resolve(snap) : fetchJson(cfg.dataUrl);
+    return fetchJson(cfg.dataUrl).then(function (json) {
+      return fromRoboDojoGenerated(json, cfg);
+    }).catch(function (err) {
+      console.warn("RoboDojo live data unavailable, using fallback", err);
+      if (snap) return snap;
+      if (cfg.fallbackUrl) return fetchJson(cfg.fallbackUrl);
+      throw err;
+    });
   }
 
   function heat(value) {
@@ -409,6 +471,8 @@
       kicker: attr(el, "data-kicker", base.kicker),
       logo: attr(el, "data-logo", base.logo),
       dataUrl: attr(el, "data-url", base.dataUrl),
+      section: attr(el, "data-section", base.section),
+      fallbackUrl: base.fallbackUrl,
       pageUrl: attr(el, "data-page", base.pageUrl),
       topN: parseInt(attr(el, "data-top", String(base.topN)), 10) || 10,
       refresh: parseInt(attr(el, "data-refresh", "0"), 10) || 0

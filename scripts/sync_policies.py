@@ -105,8 +105,9 @@ def main():
     policies = parse_policies(read_readme(args.readme))
     main_js = MAIN_JS.read_text(encoding="utf-8")
     known = existing_entries(main_js)
+    known_ci = {slug.lower(): entry for slug, entry in known.items()}
     for p in policies:
-        site = known.get(p["slug"])
+        site = known.get(p["slug"]) or known_ci.get(p["slug"].lower())
         p["name"] = site["name"] if site else p["name"]
         p["logo"] = site["logo"] if site else None
     count = len(policies)
@@ -139,7 +140,7 @@ def main():
             changed.append(str(path.relative_to(ROOT)))
     print(f"{count} policies; updated: {', '.join(changed) if changed else 'nothing'}")
     for p in policies:
-        if p["slug"] not in known:
+        if p["slug"].lower() not in known_ci:
             print(f"  new: {p['name']} ({p['slug']}) — no logo")
 
 

@@ -91,7 +91,7 @@
     { name: "X-WAM", slug: "X_WAM", logo: "X-WAM.png" },
     { name: "Xiaomi-Robotics-0", slug: "Xiaomi_Robotics_0", logo: "Xiaomi-Robotics-0.png" },
     { name: "Xiaomi-Robotics-1", slug: "Xiaomi_Robotics_1", logo: "Xiaomi-Robotics-1.png" },
-    { name: "StarVLA", slug: "starVLA", logo: "StarVLA.png" },
+    { name: "StarVLA", slug: "StarVLA", logo: "StarVLA.png" },
     { name: "ACT", slug: "ACT", logo: "ACT.png" },
     { name: "DP", slug: "DP", logo: "columbia.png" },
     { name: "Evo-1", slug: "Evo_1", logo: null },
