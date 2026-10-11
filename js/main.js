@@ -106,7 +106,10 @@
     { name: "WorldScape Policy 2.0", slug: "WorldScape_Policy_2", logo: null },
     { name: "GPT-6-Astra-Direct-EEF", slug: "GPT_6_Astra_Direct_EEF", logo: null },
     { name: "VPP2", slug: "VPP2", logo: null },
-    { name: "Liber_0_lite", slug: "Liber_0_lite", logo: null }
+    { name: "Liber_0_lite", slug: "Liber_0_lite", logo: null },
+    { name: "Discrete Forcing", slug: "Discrete_Forcing", logo: null },
+    { name: "EgoVLA", slug: "EgoVLA", logo: null },
+    { name: "MM-ABC", slug: "MM_ABC", logo: null }
     // END POLICIES
   ];
 

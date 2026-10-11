@@ -1,5 +1,5 @@
 {
-  "count": 57,
+  "count": 60,
   "policies": [
     {
       "name": "A1",
@@ -284,6 +284,21 @@
     {
       "name": "Liber_0_lite",
       "slug": "Liber_0_lite",
+      "logo": null
+    },
+    {
+      "name": "Discrete Forcing",
+      "slug": "Discrete_Forcing",
+      "logo": null
+    },
+    {
+      "name": "EgoVLA",
+      "slug": "EgoVLA",
+      "logo": null
+    },
+    {
+      "name": "MM-ABC",
+      "slug": "MM_ABC",
       "logo": null
     }
   ]
