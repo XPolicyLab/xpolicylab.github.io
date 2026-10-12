@@ -109,7 +109,10 @@
     { name: "Liber_0_lite", slug: "Liber_0_lite", logo: null },
     { name: "Discrete Forcing", slug: "Discrete_Forcing", logo: null },
     { name: "EgoVLA", slug: "EgoVLA", logo: null },
-    { name: "MM-ABC", slug: "MM_ABC", logo: null }
+    { name: "MM-ABC", slug: "MM_ABC", logo: null },
+    { name: "HWM-CogWAM", slug: "HWM_CogWAM", logo: null },
+    { name: "ME-Brain-1.0", slug: "ME_Brain_1", logo: null },
+    { name: "ME-U0", slug: "ME_U0", logo: null }
     // END POLICIES
   ];
 
