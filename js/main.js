@@ -74,7 +74,7 @@
     { name: "Meituan-Robotics-0", slug: "Meituan_Robotics_0", logo: null },
     { name: "Mem-0", slug: "Mem_0", logo: "hku.png" },
     { name: "MolmoAct2", slug: "MolmoAct2", logo: "MolmoAct2.png" },
-    { name: "OLA-SEM", slug: "OLA_SEM", logo: null },
+    { name: "UniWAM", slug: "UniWAM", logo: null },
     { name: "OpenDM", slug: "OpenDM", logo: null },
     { name: "OpenVLA-OFT", slug: "OpenVLA_OFT", logo: "OpenVLA-OFT.png" },
     { name: "OpenWAM", slug: "OpenWAM", logo: null },
