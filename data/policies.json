@@ -1,5 +1,5 @@
 {
-  "count": 63,
+  "count": 68,
   "policies": [
     {
       "name": "A1",
@@ -287,6 +287,11 @@
       "logo": null
     },
     {
+      "name": "Liber-0 Preview",
+      "slug": "Liber_0_preview",
+      "logo": null
+    },
+    {
       "name": "Discrete Forcing",
       "slug": "Discrete_Forcing",
       "logo": null
@@ -314,6 +319,26 @@
     {
       "name": "ME-U0",
       "slug": "ME_U0",
+      "logo": null
+    },
+    {
+      "name": "ME-Dex-1.0",
+      "slug": "ME_Dex_1_0",
+      "logo": null
+    },
+    {
+      "name": "Rex_M1_preview",
+      "slug": "Rex_M1_preview",
+      "logo": null
+    },
+    {
+      "name": "Spark_0",
+      "slug": "Spark_0",
+      "logo": null
+    },
+    {
+      "name": "ViGAR",
+      "slug": "ViGAR",
       "logo": null
     }
   ]
