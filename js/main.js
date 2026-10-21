@@ -117,7 +117,8 @@
     { name: "ME-Dex-1.0", slug: "ME_Dex_1_0", logo: null },
     { name: "Rex_M1_preview", slug: "Rex_M1_preview", logo: null },
     { name: "Spark_0", slug: "Spark_0", logo: null },
-    { name: "ViGAR", slug: "ViGAR", logo: null }
+    { name: "ViGAR", slug: "ViGAR", logo: null },
+    { name: "CloudRobo-WM", slug: "CloudRobo_WM", logo: null }
     // END POLICIES
   ];
 

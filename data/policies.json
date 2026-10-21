@@ -1,5 +1,5 @@
 {
-  "count": 68,
+  "count": 69,
   "policies": [
     {
       "name": "A1",
@@ -339,6 +339,11 @@
     {
       "name": "ViGAR",
       "slug": "ViGAR",
+      "logo": null
+    },
+    {
+      "name": "CloudRobo-WM",
+      "slug": "CloudRobo_WM",
       "logo": null
     }
   ]
