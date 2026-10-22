@@ -65,7 +65,7 @@
     }
   };
 
-  var RT_SHORT = { avg: "Average", hard: "Hard", easy: "Easy" };
+  var RT_SHORT = { avg: "Average", hard: "Clean → Random", easy: "Clean → Clean" };
 
   function esc(value) {
     return String(value == null ? "" : value)
@@ -250,16 +250,16 @@
       var rows = sorted.map(function (entry, i) {
         var rank = i + 1;
         var setting = settings[entry.setting] || {};
-        var digits = entry.setting === "sft" ? 2 : 1;
+        var digits = 2;
         var avg = avgMean(entry);
         var badgeClass = entry.setting === "sft" ? "xpl-board__badge xpl-board__badge--sft" : "xpl-board__badge xpl-board__badge--co";
         return "<tr>" +
           '<td class="xpl-board__rank' + (rank <= 3 ? " is-top" : "") + '">#' + rank + "</td>" +
           '<td class="xpl-board__method">' + esc(entry.name) + "</td>" +
           '<td class="xpl-board__who">' + esc(entry.contributor || defaultContributor) + "</td>" +
-          '<td class="xpl-board__score is-avg' + (sortKey === "avg" ? " is-sorted" : "") + '" style="' + (sortKey === "avg" ? heat(avg) : "") + '">' + fmtPct(avg, digits) + "</td>" +
-          '<td class="xpl-board__score is-hard' + (sortKey === "hard" ? " is-sorted" : "") + '" style="' + (sortKey === "hard" ? heat(entry.hard_mean) : "") + '">' + fmtPct(entry.hard_mean, digits) + "</td>" +
-          '<td class="xpl-board__score is-easy' + (sortKey === "easy" ? " is-sorted" : "") + '" style="' + (sortKey === "easy" ? heat(entry.easy_mean) : "") + '">' + fmtPct(entry.easy_mean, digits) + "</td>" +
+          '<td class="xpl-board__score is-avg' + (sortKey === "avg" ? " is-sorted" : "") + '" style="' + (sortKey === "avg" ? "background:#edf5ef" : "") + '">' + fmtPct(avg, digits) + "</td>" +
+          '<td class="xpl-board__score is-hard' + (sortKey === "hard" ? " is-sorted" : "") + '" style="' + (sortKey === "hard" ? "background:#edf5ef" : "") + '">' + fmtPct(entry.hard_mean, digits) + "</td>" +
+          '<td class="xpl-board__score is-easy' + (sortKey === "easy" ? " is-sorted" : "") + '" style="' + (sortKey === "easy" ? "background:#edf5ef" : "") + '">' + fmtPct(entry.easy_mean, digits) + "</td>" +
           '<td><span class="' + badgeClass + '">' + esc(setting.label || (entry.setting === "sft" ? "Single" : "Co-train")) + "</span></td>" +
         "</tr>";
       }).join("");
@@ -276,8 +276,8 @@
             "<thead><tr>" +
               "<th>Rank</th><th>Method</th><th>Contributor</th>" +
               '<th' + (sortKey === "avg" ? ' class="is-sorted"' : "") + '><button type="button" data-rt-sort="avg">Average</button></th>' +
-              '<th' + (sortKey === "hard" ? ' class="is-sorted"' : "") + '><button type="button" data-rt-sort="hard">Hard</button></th>' +
-              '<th' + (sortKey === "easy" ? ' class="is-sorted"' : "") + '><button type="button" data-rt-sort="easy">Easy</button></th>' +
+              '<th' + (sortKey === "hard" ? ' class="is-sorted"' : "") + '><button type="button" data-rt-sort="hard">Clean → Random</button></th>' +
+              '<th' + (sortKey === "easy" ? ' class="is-sorted"' : "") + '><button type="button" data-rt-sort="easy">Clean → Clean</button></th>' +
               "<th>Track</th>" +
             "</tr></thead>" +
             "<tbody>" + (rows || '<tr><td colspan="7" class="xpl-board__empty">No entries yet.</td></tr>') + "</tbody>" +
