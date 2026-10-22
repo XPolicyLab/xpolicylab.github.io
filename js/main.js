@@ -74,7 +74,7 @@
     { name: "Meituan-Robotics-0", slug: "Meituan_Robotics_0", logo: null },
     { name: "Mem-0", slug: "Mem_0", logo: "hku.png" },
     { name: "MolmoAct2", slug: "MolmoAct2", logo: "MolmoAct2.png" },
-    { name: "OLA-SEM", slug: "OLA_SEM", logo: null },
+    { name: "UniWAM", slug: "UniWAM", logo: null },
     { name: "OpenDM", slug: "OpenDM", logo: null },
     { name: "OpenVLA-OFT", slug: "OpenVLA_OFT", logo: "OpenVLA-OFT.png" },
     { name: "OpenWAM", slug: "OpenWAM", logo: null },
@@ -106,7 +106,19 @@
     { name: "WorldScape Policy 2.0", slug: "WorldScape_Policy_2", logo: null },
     { name: "GPT-6-Astra-Direct-EEF", slug: "GPT_6_Astra_Direct_EEF", logo: null },
     { name: "VPP2", slug: "VPP2", logo: null },
-    { name: "Liber_0_lite", slug: "Liber_0_lite", logo: null }
+    { name: "Liber_0_lite", slug: "Liber_0_lite", logo: null },
+    { name: "Liber-0 Preview", slug: "Liber_0_preview", logo: null },
+    { name: "Discrete Forcing", slug: "Discrete_Forcing", logo: null },
+    { name: "EgoVLA", slug: "EgoVLA", logo: null },
+    { name: "MM-ABC", slug: "MM_ABC", logo: null },
+    { name: "HWM-CogWAM", slug: "HWM_CogWAM", logo: null },
+    { name: "ME-Brain-1.0", slug: "ME_Brain_1", logo: null },
+    { name: "ME-U0", slug: "ME_U0", logo: null },
+    { name: "ME-Dex-1.0", slug: "ME_Dex_1_0", logo: null },
+    { name: "Rex_M1_preview", slug: "Rex_M1_preview", logo: null },
+    { name: "Spark_0", slug: "Spark_0", logo: null },
+    { name: "ViGAR", slug: "ViGAR", logo: null },
+    { name: "CloudRobo-WM", slug: "CloudRobo_WM", logo: null }
     // END POLICIES
   ];
 

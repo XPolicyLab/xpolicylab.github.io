@@ -1,5 +1,5 @@
 {
-  "count": 57,
+  "count": 69,
   "policies": [
     {
       "name": "A1",
@@ -122,8 +122,8 @@
       "logo": "MolmoAct2.png"
     },
     {
-      "name": "OLA-SEM",
-      "slug": "OLA_SEM",
+      "name": "UniWAM",
+      "slug": "UniWAM",
       "logo": null
     },
     {
@@ -284,6 +284,66 @@
     {
       "name": "Liber_0_lite",
       "slug": "Liber_0_lite",
+      "logo": null
+    },
+    {
+      "name": "Liber-0 Preview",
+      "slug": "Liber_0_preview",
+      "logo": null
+    },
+    {
+      "name": "Discrete Forcing",
+      "slug": "Discrete_Forcing",
+      "logo": null
+    },
+    {
+      "name": "EgoVLA",
+      "slug": "EgoVLA",
+      "logo": null
+    },
+    {
+      "name": "MM-ABC",
+      "slug": "MM_ABC",
+      "logo": null
+    },
+    {
+      "name": "HWM-CogWAM",
+      "slug": "HWM_CogWAM",
+      "logo": null
+    },
+    {
+      "name": "ME-Brain-1.0",
+      "slug": "ME_Brain_1",
+      "logo": null
+    },
+    {
+      "name": "ME-U0",
+      "slug": "ME_U0",
+      "logo": null
+    },
+    {
+      "name": "ME-Dex-1.0",
+      "slug": "ME_Dex_1_0",
+      "logo": null
+    },
+    {
+      "name": "Rex_M1_preview",
+      "slug": "Rex_M1_preview",
+      "logo": null
+    },
+    {
+      "name": "Spark_0",
+      "slug": "Spark_0",
+      "logo": null
+    },
+    {
+      "name": "ViGAR",
+      "slug": "ViGAR",
+      "logo": null
+    },
+    {
+      "name": "CloudRobo-WM",
+      "slug": "CloudRobo_WM",
       "logo": null
     }
   ]
