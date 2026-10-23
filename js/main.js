@@ -113,7 +113,7 @@
     { name: "MM-ABC", slug: "MM_ABC", logo: null },
     { name: "HWM-CogWAM", slug: "HWM_CogWAM", logo: null },
     { name: "ME-Brain-1.0", slug: "ME_Brain_1", logo: null },
-    { name: "ME-U0", slug: "ME_U0", logo: null },
+    { name: "MachEmbodied-U0", slug: "MachEmbodied-U0", logo: null },
     { name: "ME-Dex-1.0", slug: "ME_Dex_1_0", logo: null },
     { name: "Rex_M1_preview", slug: "Rex_M1_preview", logo: null },
     { name: "Spark_0", slug: "Spark_0", logo: null },
