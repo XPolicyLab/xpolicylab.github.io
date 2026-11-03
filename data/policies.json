@@ -1,5 +1,5 @@
 {
-  "count": 69,
+  "count": 70,
   "policies": [
     {
       "name": "A1",
@@ -344,6 +344,11 @@
     {
       "name": "CloudRobo-WM",
       "slug": "CloudRobo_WM",
+      "logo": null
+    },
+    {
+      "name": "Wall-X",
+      "slug": "WallX",
       "logo": null
     }
   ]
