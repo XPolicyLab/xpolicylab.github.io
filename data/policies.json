@@ -1,5 +1,5 @@
 {
-  "count": 70,
+  "count": 77,
   "policies": [
     {
       "name": "A1",
@@ -253,7 +253,7 @@
     },
     {
       "name": "PhysicalRSI",
-      "slug": "physicalRSI",
+      "slug": "PhysicalRSI",
       "logo": null
     },
     {
@@ -349,6 +349,41 @@
     {
       "name": "Wall-X",
       "slug": "WallX",
+      "logo": null
+    },
+    {
+      "name": "EWAM",
+      "slug": "EWAM",
+      "logo": null
+    },
+    {
+      "name": "GO-3 Nano Preview",
+      "slug": "GO_3_Nano_preview",
+      "logo": null
+    },
+    {
+      "name": "MWA-Phoenix",
+      "slug": "MWA_Phoenix",
+      "logo": null
+    },
+    {
+      "name": "PICA-WAM",
+      "slug": "PICA_WAM",
+      "logo": null
+    },
+    {
+      "name": "PrismWAM",
+      "slug": "PrismWAM",
+      "logo": null
+    },
+    {
+      "name": "Q0-Preview",
+      "slug": "Q0_Preview",
+      "logo": null
+    },
+    {
+      "name": "WorldLA",
+      "slug": "WorldLA",
       "logo": null
     }
   ]

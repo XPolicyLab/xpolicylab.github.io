@@ -100,7 +100,7 @@
     { name: "PatchWAM-Lite", slug: "PatchWAM", logo: null },
     { name: "Awomo-0.5", slug: "Awomo05", logo: null },
     { name: "MoPA", slug: "MoPA", logo: null },
-    { name: "PhysicalRSI", slug: "physicalRSI", logo: null },
+    { name: "PhysicalRSI", slug: "PhysicalRSI", logo: null },
     { name: "Simate-beta", slug: "Simate_beta", logo: null },
     { name: "SimpleMemVLA", slug: "SimpleMemVLA", logo: null },
     { name: "WorldScape Policy 2.0", slug: "WorldScape_Policy_2", logo: null },
@@ -119,7 +119,14 @@
     { name: "Spark_0", slug: "Spark_0", logo: null },
     { name: "ViGAR", slug: "ViGAR", logo: null },
     { name: "CloudRobo-WM", slug: "CloudRobo_WM", logo: null },
-    { name: "Wall-X", slug: "WallX", logo: null }
+    { name: "Wall-X", slug: "WallX", logo: null },
+    { name: "EWAM", slug: "EWAM", logo: null },
+    { name: "GO-3 Nano Preview", slug: "GO_3_Nano_preview", logo: null },
+    { name: "MWA-Phoenix", slug: "MWA_Phoenix", logo: null },
+    { name: "PICA-WAM", slug: "PICA_WAM", logo: null },
+    { name: "PrismWAM", slug: "PrismWAM", logo: null },
+    { name: "Q0-Preview", slug: "Q0_Preview", logo: null },
+    { name: "WorldLA", slug: "WorldLA", logo: null }
     // END POLICIES
   ];
 
